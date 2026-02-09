@@ -2,6 +2,7 @@
 import '@fontsource-variable/geist'
 import '../styles/global.css';
 import 'aos/dist/aos.css';
+import Footer from "../components/Footer.astro";
 ---
 
 <!doctype html>
@@ -14,10 +15,11 @@ import 'aos/dist/aos.css';
     <meta name="generator" content={Astro.generator}/>
     <title>ACISLAB</title>
 </head>
-<body class="min-h-screen pb-32">
+<body class="min-h-screen">
 <main class="animate-fade-in animate-duration-1000">
     <slot/>
 </main>
+<Footer/>
 </body>
 <script>
     import AOS from "aos";

@@ -1,0 +1,35 @@
+---
+const currentYear = new Date().getFullYear();
+---
+<footer class="bg-white text-brand-secondary py-5 mt-20">
+    <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-10">
+        <div>
+            <h3 class="text-2xl font-bold mb-4">ACISLAB</h3>
+            <p class="text-brand-secondary text-sm">
+                Affective Computing and Intelligent Systems Laboratory.
+
+            </p>
+        </div>
+
+        <div>
+            <h4 class="font-semibold mb-4 text-brand-secondary">Explorar</h4>
+            <ul class="space-y-2 text-brand-secondary text-sm">
+                <li><a href="/" class="hover:text-blue-300 transition">Inicio</a></li>
+                <li><a href="/research" class="hover:text-blue-300 transition">Investigación</a></li>
+                <li><a href="/team" class="hover:text-blue-300 transition">Equipo</a></li>
+            </ul>
+        </div>
+
+        <div>
+            <h4 class="font-semibold mb-4 text-brand-secondary">Contacto</h4>
+            <p class="text-brand-secondary text-sm">contacto@acislab.com</p>
+            <div class="flex gap-4 mt-4">
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-12 pt-8 text-center text-brand-secondary text-2xs">
+        &copy; {currentYear} ACISLAB. Todos los derechos reservados.
+    </div>
+
+</footer>
