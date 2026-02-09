@@ -1,7 +1,7 @@
 ---
 import '@fontsource-variable/geist'
 import '../styles/global.css';
-import Header from "../components/Header.astro";
+import 'aos/dist/aos.css';
 ---
 
 <!doctype html>
@@ -15,10 +15,21 @@ import Header from "../components/Header.astro";
     <title>ACISLAB</title>
 </head>
 <body class="min-h-screen pb-32">
-<main>
+<main class="animate-fade-in animate-duration-1000">
     <slot/>
 </main>
 </body>
+<script>
+    import AOS from "aos";
+
+    document.addEventListener('DOMContentLoaded', () => {
+        AOS.init({
+            duration: 1000,
+            once: true,
+            easing: 'ease-out-quad',
+        });
+    });
+</script>
 </html>
 
 
