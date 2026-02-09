@@ -1,1 +1,9 @@
 @import "tailwindcss";
+
+@theme {
+    /* Colors ASCISLAB */
+    --color-brand-primary: #1990C3;
+    --color-brand-secondary: #2b7efd;
+    --color-acislab-blue: #155cfa;
+    --color-acislab-gray: #757575;
+}

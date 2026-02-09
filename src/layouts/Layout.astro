@@ -1,4 +1,5 @@
 ---
+import '@fontsource-variable/geist'
 import '../styles/global.css';
 import Header from "../components/Header.astro";
 ---
@@ -14,18 +15,10 @@ import Header from "../components/Header.astro";
     <title>ACISLAB</title>
 </head>
 <body class="min-h-screen pb-32">
-<Header></Header>
 <main>
     <slot/>
 </main>
 </body>
 </html>
 
-<style is:global>
-    html {
-        font-family: system-ui, sans-serif;
-        background: white;
-        background-size: 224px;
-    }
-</style>
 
