@@ -1,64 +1,140 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
 import Hero from "../components/Hero.astro";
 import ButtonGroup from "../components/ButtonGroup.astro";
 import LinkButton from "../components/LinkButton.astro";
 import About from "../components/About.astro";
-import MembersCardsSection from '../components/MembersCardsSection.astro';
-
+import MembersCardsSection from "../components/MembersCardsSection.astro";
+import ResearchAreasSection from "../components/ResearchAreasSection.astro";
 ---
 
 <Layout>
     <main class="flex flex-col gap-y-10">
-        <Hero></Hero>
+        <Hero />
         <ButtonGroup>
-            <LinkButton href="/Projects">
-                Our research
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                     class="icon icon-tabler icons-tabler-outline icon-tabler-cube">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                    <path d="M21 16.008v-8.018a1.98 1.98 0 0 0 -1 -1.717l-7 -4.008a2.016 2.016 0 0 0 -2 0l-7 4.008c-.619 .355 -1 1.01 -1 1.718v8.018c0 .709 .381 1.363 1 1.717l7 4.008a2.016 2.016 0 0 0 2 0l7 -4.008c.619 -.355 1 -1.01 1 -1.718"/>
-                    <path d="M12 22v-10"/>
-                    <path d="M12 12l8.73 -5.04"/>
-                    <path d="M3.27 6.96l8.73 5.04"/>
-                </svg>
-            </LinkButton>
+            <div class="relative group">
+                <LinkButton>
+                    Our research
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="icon icon-tabler icon-tabler-cube"
+                    >
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"
+                        ></path>
+                        <path
+                            d="M21 16.008v-8.018a1.98 1.98 0 0 0 -1 -1.717l-7 -4.008a2.016 2.016 0 0 0 -2 0l-7 4.008c-.619 .355 -1 1.01 -1 1.718v8.018c0 .709 .381 1.363 1 1.717l7 4.008a2.016 2.016 0 0 0 2 0l7 -4.008c.619 -.355 1 -1.01 1 -1.718"
+                        ></path>
+                        <path d="M12 22v-10"></path>
+                        <path d="M12 12l8.73 -5.04"></path>
+                        <path d="M3.27 6.96l8.73 5.04"></path>
+                    </svg>
+                </LinkButton>
+
+                <div
+                    class="absolute left-0 top-full mt-3 w-72
+                        rounded-xl border border-slate-200 bg-white shadow-lg
+                        opacity-0 invisible
+                        translate-y-2 scale-95
+                        transition-all duration-300 ease-out
+                        group-hover:opacity-100 group-hover:visible
+                        group-hover:translate-y-0 group-hover:scale-100"
+                    >
+                    <ul class="py-2">
+                        <li>
+                            <a
+                                href="/research/affective-computing"
+                                class="block px-5 py-3 text-sm text-slate-700 hover:bg-slate-50 hover:text-acislab-blue transition-colors"
+                            >
+                                <span class="font-semibold block">
+                                    Affective Computing & Intelligent Systems
+                                </span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a
+                                href="/research/healthcare"
+                                class="block px-5 py-3 text-sm text-slate-700 hover:bg-slate-50 hover:text-acislab-blue transition-colors"
+                            >
+                                <span class="font-semibold block">
+                                    Healthcare-Centered Systems
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
             <LinkButton href="/Publications">
                 Theses and papers
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"
-                     class="icon icon-tabler icons-tabler-filled icon-tabler-article">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                    <path d="M19 3a3 3 0 0 1 2.995 2.824l.005 .176v12a3 3 0 0 1 -2.824 2.995l-.176 .005h-14a3 3 0 0 1 -2.995 -2.824l-.005 -.176v-12a3 3 0 0 1 2.824 -2.995l.176 -.005h14zm-2 12h-10l-.117 .007a1 1 0 0 0 0 1.986l.117 .007h10l.117 -.007a1 1 0 0 0 0 -1.986l-.117 -.007zm0 -4h-10l-.117 .007a1 1 0 0 0 0 1.986l.117 .007h10l.117 -.007a1 1 0 0 0 0 -1.986l-.117 -.007zm0 -4h-10l-.117 .007a1 1 0 0 0 0 1.986l.117 .007h10l.117 -.007a1 1 0 0 0 0 -1.986l-.117 -.007z"/>
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    class="icon icon-tabler icons-tabler-filled icon-tabler-article"
+                >
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path
+                        d="M19 3a3 3 0 0 1 2.995 2.824l.005 .176v12a3 3 0 0 1 -2.824 2.995l-.176 .005h-14a3 3 0 0 1 -2.995 -2.824l-.005 -.176v-12a3 3 0 0 1 2.824 -2.995l.176 -.005h14zm-2 12h-10l-.117 .007a1 1 0 0 0 0 1.986l.117 .007h10l.117 -.007a1 1 0 0 0 0 -1.986l-.117 -.007zm0 -4h-10l-.117 .007a1 1 0 0 0 0 1.986l.117 .007h10l.117 -.007a1 1 0 0 0 0 -1.986l-.117 -.007zm0 -4h-10l-.117 .007a1 1 0 0 0 0 1.986l.117 .007h10l.117 -.007a1 1 0 0 0 0 -1.986l-.117 -.007z"
+                    ></path>
                 </svg>
             </LinkButton>
             <LinkButton href="/Members">
                 Members
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                     class="icon icon-tabler icons-tabler-outline icon-tabler-user">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                    <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"/>
-                    <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"/>
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="icon icon-tabler icons-tabler-outline icon-tabler-user"
+                >
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
+                    <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
                 </svg>
             </LinkButton>
             <LinkButton href="/Contact">
                 Contact
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                     class="icon icon-tabler icons-tabler-outline icon-tabler-address-book">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                    <path d="M20 6v12a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2"/>
-                    <path d="M10 16h6"/>
-                    <path d="M11 11a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"/>
-                    <path d="M4 8h3"/>
-                    <path d="M4 12h3"/>
-                    <path d="M4 16h3"/>
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="icon icon-tabler icons-tabler-outline icon-tabler-address-book"
+                >
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path
+                        d="M20 6v12a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2"
+                    ></path>
+                    <path d="M10 16h6"></path>
+                    <path d="M11 11a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
+                    <path d="M4 8h3"></path>
+                    <path d="M4 12h3"></path>
+                    <path d="M4 16h3"></path>
                 </svg>
             </LinkButton>
         </ButtonGroup>
-        <About></About>
-        <MembersCardsSection></MembersCardsSection>
-
+        <About />
+        <ResearchAreasSection />
+        <MembersCardsSection />
     </main>
 </Layout>
