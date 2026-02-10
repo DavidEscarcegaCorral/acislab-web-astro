@@ -1,0 +1,112 @@
+---
+import MemberCard from '../components/MemberCard.astro';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+---
+
+<section class="py-20 px-20 bg-white ">
+    <div class="swiper mySwiper !p-15">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <MemberCard
+                        name="Luis - Felipe Rodriguez"
+                        role="Group Leader"
+                        image="/luis.jpg"
+                        bio="I am a full professor in the Department of Computer Science & Design at Instituto Tecnológico de Sonora, México. My research areas include computational modeling of emotions for virtual agents, cognitive agent archite."
+                />
+            </div>
+            <div class="swiper-slide">
+                <MemberCard
+                        name="Eduardo Islas"
+                        role="PhD Student"
+                        image="/Eduardo.jpg"
+                        bio="I'm working on the design and development of an Intelligent Assistant to provide social support to informal caregivers of people with Alzheimer's and other dementias."/>
+            </div>
+            <div class="swiper-slide">
+                <MemberCard
+                        name="Sergio Castellanos"
+                        role="PhD Student"
+                        image="/Sergio.png"
+                        bio="..."/>
+            </div>
+            <div class="swiper-slide">
+                <MemberCard
+                        name="Tania Barreras"
+                        role="MSc Student"
+                        image="/tania.png"
+                        bio="..."/>
+            </div>
+            <div class="swiper-slide">
+                <MemberCard
+                        name="Jesus Gonzáles"
+                        role="MSc Student"
+                        image="/jesus.png"
+                        bio="..."/>
+            </div>
+            <div class="swiper-slide">
+                <MemberCard
+                        name="Enrique Osuna"
+                        role="PhD sutdent"
+                        image="/Enrique.jpg"
+                        bio="..."/>
+            </div>
+            <div class="swiper-slide">
+                <MemberCard
+                        name="Marco Esquer"
+                        role="PhD sutdent"
+                        image="/M_esquer-293x300.png"
+                        bio="..."/>
+            </div>
+
+        </div>
+
+        <div class="swiper-button-next !text-brand-secondary"></div>
+        <div class="swiper-button-prev !text-brand-secondary"></div>
+        <div class="swiper-pagination"></div>
+    </div>
+</section>
+
+<script>
+    import Swiper from 'swiper';
+    import {Navigation, Pagination} from 'swiper/modules';
+
+    new Swiper('.mySwiper', {
+        modules: [Navigation, Pagination],
+        slidesPerView: 3,
+        spaceBetween: 50,
+        centeredSlides: true,
+        loop: true,
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+        breakpoints: {
+            320: { slidesPerView: 1 },
+            768: { slidesPerView: 2 },
+            1024: { slidesPerView: 3 }
+        }
+    });
+</script>
+
+<style>
+    .swiper {
+        overflow: hidden !important;
+        padding-bottom: 150px !important;
+        padding-top: 200px !important;
+    }
+
+    .swiper-slide {
+        display: flex;
+        justify-content: flex-start;
+        transition: z-index 0.8s;
+    }
+
+    .swiper-slide:hover {
+        z-index: 50;
+    }
+</style>

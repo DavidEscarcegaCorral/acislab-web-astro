@@ -6,6 +6,7 @@
     --color-brand-secondary: #2b7efd;
     --color-acislab-blue: #155cfa;
     --color-acislab-gray: #757575;
+    --color-card-gray: #EDEDED;
 }
 
 @keyframes fadeIn {
