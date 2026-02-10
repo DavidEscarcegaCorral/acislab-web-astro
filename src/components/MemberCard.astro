@@ -1,12 +1,15 @@
 ---
+import {Image} from 'astro:assets';
+
 interface Props {
     name: string;
     role: string;
-    image: string;
+    image: ImageMetadata;
     bio: string;
 }
-const { name, role, image, bio} = Astro.props;
+const {name, role, image, bio} = Astro.props;
 ---
+
 <div class="
     flex flex-col items-center text-center gap-4 p-6 bg-[#f0f0f0] rounded-lg
     w-full max-w-[300px] h-auto min-h-[350px] overflow-hidden
@@ -19,7 +22,13 @@ const { name, role, image, bio} = Astro.props;
     md:hover:max-w-[550px]
 ">
     <div class="w-24 h-24 shrink-0 overflow-hidden rounded-full border-2 border-white shadow-sm">
-        <img src={image} alt={name} class="w-full h-full object-cover" />
+        <Image
+                src={image}
+                alt={name}
+                width={300}
+                height={300}
+                class="w-full h-full object-cover"
+        />
     </div>
 
     <div class="flex flex-col w-full">

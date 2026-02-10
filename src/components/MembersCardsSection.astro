@@ -1,18 +1,27 @@
 ---
 import MemberCard from '../components/MemberCard.astro';
+
+import fotoLuis from '../assets/members/luis.jpg';
+import fotoEduardo from '../assets/members/Eduardo.jpg';
+import fotoSergio from '../assets/members/Sergio.png';
+import fotoTania from '../assets/members/tania.png';
+import fotoJesus from '../assets/members/jesus.png';
+import fotoEnrique from '../assets/members/Enrique.jpg';
+import fotoMarco from '../assets/members/M_esquer-293x300.png';
+
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 ---
 
-<section class="py-20 px-20 bg-white ">
+<section class="px-20 bg-white ">
     <div class="swiper mySwiper !p-15">
         <div class="swiper-wrapper">
             <div class="swiper-slide">
                 <MemberCard
                         name="Luis - Felipe Rodriguez"
                         role="Group Leader"
-                        image="/luis.jpg"
+                        image={fotoLuis}
                         bio="I am a full professor in the Department of Computer Science & Design at Instituto Tecnológico de Sonora, México. My research areas include computational modeling of emotions for virtual agents, cognitive agent archite."
                 />
             </div>
@@ -20,42 +29,42 @@ import 'swiper/css/pagination';
                 <MemberCard
                         name="Eduardo Islas"
                         role="PhD Student"
-                        image="/Eduardo.jpg"
+                        image={fotoEduardo}
                         bio="I'm working on the design and development of an Intelligent Assistant to provide social support to informal caregivers of people with Alzheimer's and other dementias."/>
             </div>
             <div class="swiper-slide">
                 <MemberCard
                         name="Sergio Castellanos"
                         role="PhD Student"
-                        image="/Sergio.png"
+                        image={fotoSergio}
                         bio="..."/>
             </div>
             <div class="swiper-slide">
                 <MemberCard
                         name="Tania Barreras"
                         role="MSc Student"
-                        image="/tania.png"
+                        image={fotoTania}
                         bio="..."/>
             </div>
             <div class="swiper-slide">
                 <MemberCard
                         name="Jesus Gonzáles"
                         role="MSc Student"
-                        image="/jesus.png"
+                        image={fotoJesus}
                         bio="..."/>
             </div>
             <div class="swiper-slide">
                 <MemberCard
                         name="Enrique Osuna"
                         role="PhD sutdent"
-                        image="/Enrique.jpg"
+                        image={fotoEnrique}
                         bio="..."/>
             </div>
             <div class="swiper-slide">
                 <MemberCard
                         name="Marco Esquer"
                         role="PhD sutdent"
-                        image="/M_esquer-293x300.png"
+                        image={fotoMarco}
                         bio="..."/>
             </div>
 
