@@ -20,7 +20,6 @@ const { showHeader = true } = Astro.props;
 </head>
 
 <body class="min-h-screen flex flex-col">
-    {showHeader && <Header />}
     <main class="flex-grow animate-fade-in animate-duration-1000">
         <slot />
     </main>
