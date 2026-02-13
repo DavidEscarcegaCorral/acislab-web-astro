@@ -1,0 +1,38 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+
+const { project } = Astro.props;
+const { title, description, heroImage} = project.data;
+---
+
+<article class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg overflow-hidden hover:shadow-xl transition-shadow flex flex-col h-full">
+  
+  {heroImage && (
+    <a href={`/projects/${project.slug}`} class="block overflow-hidden group">
+      <img 
+        src={heroImage} 
+        alt={title} 
+        class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
+      />
+    </a>
+  )}
+
+  <div class="p-6 flex flex-col flex-grow">
+
+    <h3 class="text-xl font-bold mb-2 text-slate-900 dark:text-white leading-tight">
+      <a href={`/projects/${project.slug}`} class="hover:text-sky-600 dark:hover:text-sky-400 transition-colors">
+        {title}
+      </a>
+    </h3>
+
+    <p class="text-slate-600 dark:text-slate-400 mb-6 line-clamp-3 text-sm flex-grow leading-relaxed">
+      {description}
+    </p>
+
+
+  </div>
+</article>
