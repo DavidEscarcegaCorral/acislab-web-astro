@@ -1,11 +1,8 @@
 ---
 import { getCollection } from "astro:content";
-import { Navigation, Autoplay } from "swiper/modules";
 import ProjectCard from "./ProjectCard.astro";
 
 const projects = await getCollection("projects");
-
-const { project } = Astro.props;
 ---
 
 <section class="w-full py-24 bg-white">
@@ -33,11 +30,11 @@ const { project } = Astro.props;
         </a>
     </div>
 
-    <div class="relative px-6">
+    <div class="relative px-6 max-w-7xl mx-auto">
         <div class="swiper projectsSwiper">
             <div class="swiper-wrapper">
                 {
-                    projects.map((project: unknown) => (
+                    projects.map((project) => (
                         <div class="swiper-slide h-auto">
                             <ProjectCard project={project} />
                         </div>
@@ -48,30 +45,41 @@ const { project } = Astro.props;
 
         <button
             class="swiper-button-prev
-         absolute top-1/2 -translate-y-1/2 left-2 z-10
-         bg-white border border-slate-200
-         w-12 h-12 rounded-full shadow
-         flex items-center justify-center"
+            absolute top-1/2 -translate-y-1/2 left-2 z-20
+            bg-white w-11 h-11 rounded-full shadow-md
+            flex items-center justify-center
+            text-brand-secondary cursor-pointer
+            transition-all duration-300
+            hover:bg-brand-secondary hover:text-white hover:shadow-lg hover:scale-110
+            opacity-50 group-hover/carousel:opacity-100"
         ></button>
 
         <button
             class="swiper-button-next
-         absolute top-1/2 -translate-y-1/2 right-2 z-10
-         bg-white border border-slate-200
-         w-12 h-12 rounded-full shadow
-         flex items-center justify-center"
+            absolute top-1/2 -translate-y-1/2 right-2 z-20
+            bg-white w-11 h-11 rounded-full shadow-md
+            flex items-center justify-center
+            text-brand-secondary cursor-pointer
+            transition-all duration-300
+            hover:bg-brand-secondary hover:text-white hover:shadow-lg hover:scale-110
+            opacity-50 group-hover/carousel:opacity-100"
         ></button>
     </div>
 </section>
 
-<script client:load>
+<script>
   import Swiper from "swiper";
   import { Navigation, Autoplay } from "swiper/modules";
+  
+  import 'swiper/css';
+  import 'swiper/css/navigation';
+  import 'swiper/css/autoplay';
 
   new Swiper(".projectsSwiper", {
     modules: [Navigation, Autoplay],
     slidesPerView: 1,
     spaceBetween: 32,
+    loop: true, 
 
     navigation: {
       nextEl: ".swiper-button-next",
@@ -79,7 +87,7 @@ const { project } = Astro.props;
     },
 
     autoplay: {
-      delay: 1200,
+      delay: 2500,
       disableOnInteraction: false,
       pauseOnMouseEnter: true,
     },
