@@ -18,7 +18,7 @@ const publications = defineCollection({
     authors: z.string(),
     pubDate: z.string(),
     description: z.string(),
-    url: z.string().url(),
+    url: z.string().optional(),
   }),
 });
 

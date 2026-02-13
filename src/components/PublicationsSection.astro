@@ -31,8 +31,7 @@ const years = [
                 </h1>
                 <p class="text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
                     Explore our latest research contributions, conference papers,
-                    and academic articles regarding AI, Healthcare, and Software
-                    Engineering.
+                    and academic articles.
                 </p>
             </div>
 
@@ -57,53 +56,63 @@ const years = [
                 >
                     All
                 </button>
-                {
-                    years.map((year) => (
-                        <button
-                            class="filter-btn px-6 py-2 rounded-full border border-slate-300 text-slate-600 font-medium transition-all hover:border-brand-secondary hover:text-brand-secondary"
-                            data-year={year}
-                        >
-                            {year}
-                        </button>
-                    ))
-                }
+                {years.map((year) => (
+                    <button
+                        class="filter-btn px-6 py-2 rounded-full border border-slate-300 text-slate-600 font-medium transition-all hover:border-brand-secondary hover:text-brand-secondary"
+                        data-year={year}
+                    >
+                        {year}
+                    </button>
+                ))}
             </div>
 
             <div class="space-y-6" id="publications-list">
-                {
-                    allPublications.length > 0 ? (
-                        allPublications.map((pub) => (
-                            <article
-                                class="pub-card group relative bg-white border border-slate-200 p-8 rounded-xl hover:shadow-lg transition-all duration-300 hover:border-brand-primary/30"
-                                data-year={getYear(pub.data.pubDate)} 
-                            >
-                                <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
-                                    <div class="flex-1">
-                                        <div class="flex items-center gap-3 text-sm text-slate-500 mb-3">
-                                            <span class="bg-slate-100 text-slate-700 px-3 py-1 rounded-full font-semibold">
-                                                {pub.data.pubDate}
+                {allPublications.length > 0 ? (
+                    allPublications.map((pub) => (
+                        <article
+                            class="pub-card group relative bg-white border border-slate-200 p-8 rounded-xl hover:shadow-lg transition-all duration-300 hover:border-brand-primary/30"
+                            data-year={getYear(pub.data.pubDate)} 
+                        >
+                            <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+                                <div class="flex-1">
+                                    <div class="flex items-center gap-3 text-sm text-slate-500 mb-3">
+                                        <span class="bg-slate-100 text-slate-700 px-3 py-1 rounded-full font-semibold">
+                                            {pub.data.pubDate}
+                                        </span>
+                                        {!pub.data.url && (
+                                            <span class="text-xs font-bold text-amber-600 bg-amber-50 px-2 py-0.5 rounded border border-amber-200">
+                                                Not available online yet
                                             </span>
-                                        </div>
+                                        )}
+                                    </div>
 
-                                        <h3 class="pub-title text-xl font-bold text-slate-900 group-hover:text-brand-secondary transition-colors mb-2">
+                                    <h3 class="pub-title text-xl font-bold text-slate-900 mb-2 transition-colors">
+                                        {pub.data.url ? (
                                             <a
                                                 href={pub.data.url}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
+                                                class="group-hover:text-brand-secondary hover:underline"
                                             >
                                                 {pub.data.title}
                                             </a>
-                                        </h3>
+                                        ) : (
+                                            <span class="cursor-default">
+                                                {pub.data.title}
+                                            </span>
+                                        )}
+                                    </h3>
 
-                                        <p class="pub-authors text-slate-800 font-medium mb-3 text-sm">
-                                            {pub.data.authors}
-                                        </p>
+                                    <p class="pub-authors text-slate-800 font-medium mb-3 text-sm">
+                                        {pub.data.authors}
+                                    </p>
 
-                                        <p class="pub-desc text-slate-600 leading-relaxed text-sm">
-                                            {pub.data.description}
-                                        </p>
-                                    </div>
+                                    <p class="pub-desc text-slate-600 leading-relaxed text-sm">
+                                        {pub.data.description}
+                                    </p>
+                                </div>
 
+                                {pub.data.url && (
                                     <div class="mt-4 md:mt-0 flex-shrink-0">
                                         <a
                                             href={pub.data.url}
@@ -117,15 +126,15 @@ const years = [
                                             </svg>
                                         </a>
                                     </div>
-                                </div>
-                            </article>
-                        ))
-                    ) : (
-                        <p class="text-center text-slate-500">
-                            No publications found.
-                        </p>
-                    )
-                }
+                                )}
+                            </div>
+                        </article>
+                    ))
+                ) : (
+                    <p class="text-center text-slate-500">
+                        No publications found.
+                    </p>
+                )}
             </div>
 
             <div id="no-results" class="hidden text-center py-12">
@@ -197,6 +206,7 @@ const years = [
                 applyFilters();
             });
         });
+
         if (searchInput) {
             searchInput.addEventListener("input", (e) => {
                 currentSearch = (e.target as HTMLInputElement).value.toLowerCase();
