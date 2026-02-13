@@ -1,0 +1,37 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ProjectCarousel from "../components/ProjectCarousel.astro";
+---
+
+<Layout>
+    <main class="w-full">
+        <section class="w-full py-24 bg-slate-50 px-6">
+            <div class="max-w-4xl mx-auto text-center">
+                <span class="text-brand-primary font-bold tracking-wider uppercase text-sm mb-2 block">
+                    Research Area
+                </span>
+                <h1 class="text-4xl md:text-5xl font-bold text-brand-secondary mb-6">
+                    Affective Computing
+                </h1>
+                <h2 class="text-xl text-slate-700 font-medium mb-8">
+                    Bridging the gap between human emotion and technology
+                </h2>
+                <p class="text-lg text-slate-600 leading-relaxed">
+                   We explore the intersection between human emotion and intelligent systems. Our research in Affective Computing focuses on designing technologies that can recognize, interpret, and simulate emotional states to foster more natural and empathetic interactions between humans and machines.
+
+We aim to develop computational models that not only understand affective signals such as facial expressions, voice tone, and physiological responses but also respond in emotionally intelligent ways. These models are applied in diverse contexts, including:
+
+Supporting caregivers and decision-makers in dementia care environments
+Enhancing virtual agents with human-like emotional behavior
+Creating immersive 3D simulations for affective interaction testing
+Our Intelligent Systems research line focuses on the design and development of software platforms, virtual agents, and AI systems capable of operating autonomously, learning from their environment, and collaborating effectively with humans in complex tasks.
+                </p>
+            </div>
+        </section>
+
+        <ProjectCarousel 
+            title="Related Projects" 
+            filterTag="Affective" 
+        />
+    </main>
+</Layout>

@@ -2,12 +2,23 @@
 import { getCollection } from "astro:content";
 import ProjectCard from "./ProjectCard.astro";
 
-const projects = await getCollection("projects");
----
+const allprojects = await getCollection("projects");
 
+interface Props {
+  title?: string; 
+  filterTag?: string; 
+}
+
+const { title = "Projects", filterTag } = Astro.props;
+
+const projects = filterTag 
+  ? allprojects.filter(p => p.data.tags?.includes(filterTag))
+  : allprojects;
+---
+{projects.length > 0 && (
 <section class="w-full py-24 bg-white">
     <div class="max-w-7xl mx-auto px-6 mb-12 flex items-center justify-between">
-        <h2 class="text-4xl font-bold text-brand-secondary">Projects</h2>
+        <h2 class="text-4xl font-bold text-brand-secondary">{title}</h2>
 
         <a
             href="/projects"
@@ -66,6 +77,7 @@ const projects = await getCollection("projects");
         ></button>
     </div>
 </section>
+)}
 
 <script>
   import Swiper from "swiper";
