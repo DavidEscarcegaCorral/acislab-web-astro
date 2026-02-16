@@ -1,0 +1,113 @@
+---
+import { getCollection } from "astro:content";
+import ProjectCard from "./ProjectCard.astro";
+
+const allprojects = await getCollection("projects");
+
+interface Props {
+  title?: string; 
+  filterTag?: string; 
+}
+
+const { title = "Projects", filterTag } = Astro.props;
+
+const projects = filterTag 
+  ? allprojects.filter(p => p.data.tags?.includes(filterTag))
+  : allprojects;
+---
+{projects.length > 0 && (
+<section class="w-full py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-6 mb-12 flex items-center justify-between">
+        <h2 class="text-4xl font-bold text-brand-secondary">{title}</h2>
+
+        <a
+            href="/projects"
+            class="text-brand-primary font-medium flex items-center gap-2 hover:underline"
+        >
+            View all
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="w-4 h-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+            >
+                <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M9 5l7 7-7 7"></path>
+            </svg>
+        </a>
+    </div>
+
+    <div class="relative px-6 max-w-7xl mx-auto">
+        <div class="swiper projectsSwiper">
+            <div class="swiper-wrapper">
+                {
+                    projects.map((project) => (
+                        <div class="swiper-slide h-auto">
+                            <ProjectCard project={project} />
+                        </div>
+                    ))
+                }
+            </div>
+        </div>
+
+        <button
+            class="swiper-button-prev
+            absolute top-1/2 -translate-y-1/2 left-2 z-20
+            bg-white w-11 h-11 rounded-full shadow-md
+            flex items-center justify-center
+            text-brand-secondary cursor-pointer
+            transition-all duration-300
+            hover:bg-brand-secondary hover:text-white hover:shadow-lg hover:scale-110
+            opacity-50 group-hover/carousel:opacity-100"
+        ></button>
+
+        <button
+            class="swiper-button-next
+            absolute top-1/2 -translate-y-1/2 right-2 z-20
+            bg-white w-11 h-11 rounded-full shadow-md
+            flex items-center justify-center
+            text-brand-secondary cursor-pointer
+            transition-all duration-300
+            hover:bg-brand-secondary hover:text-white hover:shadow-lg hover:scale-110
+            opacity-50 group-hover/carousel:opacity-100"
+        ></button>
+    </div>
+</section>
+)}
+
+<script>
+  import Swiper from "swiper";
+  import { Navigation, Autoplay } from "swiper/modules";
+  
+  import 'swiper/css';
+  import 'swiper/css/navigation';
+  import 'swiper/css/autoplay';
+
+  new Swiper(".projectsSwiper", {
+    modules: [Navigation, Autoplay],
+    slidesPerView: 1,
+    spaceBetween: 32,
+    loop: true, 
+
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+
+    autoplay: {
+      delay: 2500,
+      disableOnInteraction: false,
+      pauseOnMouseEnter: true,
+    },
+
+    breakpoints: {
+      640: { slidesPerView: 1.2 },
+      768: { slidesPerView: 2 },
+      1024: { slidesPerView: 3 },
+    },
+  });
+</script>

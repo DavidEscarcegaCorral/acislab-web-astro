@@ -1,18 +1,20 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Hero from "../components/Hero.astro";
-import ButtonGroup from "../components/ButtonGroup.astro";
 import About from "../components/About.astro";
 import MembersCardsSection from '../components/MembersCardsSection.astro';
 import ResearchAreas from "../components/ResearchAreas.astro";
+import ResearchVisionSection from "../components/ResearchVisionSection.astro";
+import ProjectsCarousel from "../components/ProjectsCarousel.astro";
 ---
 
-<Layout>
-    <main class="flex flex-col gap-y-10  px-4 md:px-0">
+<Layout isHome={true}>
+    <main class="flex flex-col gap-y-10 w-full px-4 md:px-0">
         <Hero/>
-        <ButtonGroup/>
         <About/>
         <ResearchAreas/>
+        <ProjectsCarousel/>
+        <ResearchVisionSection/>
         <MembersCardsSection/>
     </main>
 </Layout>
