@@ -8,30 +8,40 @@ interface Props {
 const { project } = Astro.props;
 const { title, description, heroImage } = project.data;
 ---
+<article class="group  rounded-xl overflow-hidden
+                flex flex-col h-full
+                shadow-lg
+                transition-all duration-300 ease-out
+                hover:scale-105 hover:shadow-2xl">
 
-<article class="bg-white border border-slate-200 rounded-lg overflow-hidden hover:shadow-xl transition-shadow flex flex-col h-full">
-  
-  {heroImage && (
-    <a href={`/projects/${project.slug}`} class="block overflow-hidden group">
-      <img 
-        src={heroImage} 
-        alt={title} 
-        class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
-      />
-    </a>
-  )}
+    {heroImage && (
+            <a href={`/projects/${project.slug}`} class="block overflow-hidden">
+                <img
+                        src={heroImage}
+                        alt={title}
+                        class="w-full h-48 object-cover"
+                />
+            </a>
+    )}
 
-  <div class="p-6 flex flex-col flex-grow">
+    <div class="p-6 flex flex-col items-center">
 
-    <h3 class="text-xl font-bold mb-2 leading-tight">
-      <a href={`/projects/${project.slug}`} class="text-brand-secondary hover:text-brand-primary transition-colors">
-        {title}
-      </a>
-    </h3>
+        <h3 class="text-xl font-bold leading-tight w-fit
+           mx-auto
+           transition-all duration-1000 ease-in-out
+           group-hover:ml-0 group-hover:mr-auto">
+            <a href={`/projects/${project.slug}`} class="text-brand-secondary block">
+                {title}
+            </a>
+        </h3>
 
-    <p class="text-slate-600 mb-6 line-clamp-3 text-sm flex-grow leading-relaxed">
-      {description}
-    </p>
+        <p class="text-slate-600 text-sm leading-relaxed mt-4
+              max-h-0 overflow-hidden opacity-0
+              transition-all duration-300
+              group-hover:max-h-40
+              group-hover:opacity-100">
+            {description}
+        </p>
 
-  </div>
+    </div>
 </article>
