@@ -1,6 +1,21 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import ProjectsCarousel from "../components/ProjectsCarousel.js";
+import ProjectCarousel from "../components/ProjectCarousel.astro";
+
+const publicationsRepresentative = [
+    {
+        title: "Cognitive computational models of emotions and affective behaviors.",
+        url: "https://www.igi-global.com/article/content/72879",
+    },
+    {
+        title: "Emotional attention in autonomous agents: a biologically inspired model.",
+        url: "https://ieeexplore.ieee.org/abstract/document/6337401",
+    },
+    {
+        title: "Configurable Appraisal Dimensions for Computational Models of Emotions of Affective Agents.",
+        url: "https://link.springer.com/chapter/10.1007/978-3-030-25719-4_7",
+    },
+];
 ---
 
 <Layout>
@@ -29,9 +44,54 @@ Our Intelligent Systems research line focuses on the design and development of s
             </div>
         </section>
 
-        <ProjectsCarousel
+        <ProjectCarousel 
             title="Related Projects" 
             filterTag="Affective" 
         />
+
+        <section class="w-full py-16 bg-white px-6">
+           <div class="relative px-6 max-w-7xl mx-auto">
+                <h3
+                    class="text-3xl font-bold text-brand-secondary mb-8 text-left"
+                >
+                    Representative Publications
+                </h3>
+
+                <ul class="space-y-4">
+                    {
+                        publicationsRepresentative.map((pub) => (
+                            <li class="group">
+                                <a
+                                    href={pub.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="flex items-start gap-3 text-lg font-medium text-slate-700 hover:text-brand-primary transition-colors"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="w-5 h-5 mt-1 flex-shrink-0 text-brand-primary/60 group-hover:text-brand-primary"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            d="M9 5l7 7-7 7"
+                                        />
+                                    </svg>
+
+                                    <span class="group-hover:underline decoration-2 underline-offset-4 decoration-brand-primary/30">
+                                        {pub.title}
+                                    </span>
+                                </a>
+                            </li>
+                        ))
+                    }
+                </ul>
+            </div>
+        </section>
+
     </main>
 </Layout>
