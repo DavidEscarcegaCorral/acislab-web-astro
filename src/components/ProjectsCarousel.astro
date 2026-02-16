@@ -15,6 +15,7 @@ const projects = filterTag
   ? allprojects.filter(p => p.data.tags?.includes(filterTag))
   : allprojects;
 ---
+
 {projects.length > 0 && (
 <section class="w-full py-24 bg-white">
     <div class="max-w-7xl mx-auto px-6 mb-12 flex items-center justify-between">
