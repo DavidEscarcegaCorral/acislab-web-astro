@@ -7,7 +7,7 @@ const groupLeader = [
     portfolio: "https://scholar.google.co.uk/citations?user=IQRBs04AAAAJ&hl=en",
     thesis: null,
     link: null,
-    image: "../assets/members/luis.jpg"
+    image: '../public/members/luis.jpg'
   },
 ];
 
@@ -16,7 +16,7 @@ const phdStudents = [
     name: "Marco Antonio Esquer Rochin",
     thesis: "Determining the cognitive status of people with dementia through performance in technology-supported cognitive activities",
     link: null,
-    image: "../assets/members/M_esquer-293x300.png"
+    image: "../public/members/M_esquer-293x300.png"
   },
   {
     name: "Martín Gildardo Salido Ortega",
@@ -28,7 +28,7 @@ const phdStudents = [
     name: "Mario Enrique Osuna Cuen",
     thesis: "A Framework to Create Extensible Computational Models of Emotion",
     link: null, 
-    image: "../assets/members/Enrique.jpg"
+    image: "../public/members/Enrique.jpg"
   },
   {
     name: "Omar López Chávez",
@@ -40,7 +40,7 @@ const phdStudents = [
     name: "Sergio Castellanos Bustamante",
     thesis: "Emulating the bias caused by factors that influence the emotional evaluation process in intelligent agents",
     link: null, 
-    image: "../assets/members/Sergio.png"
+    image: "../public/members/Sergio.png"
   },
   {
     name: "Paloma Daniela Gómez Álvarez",
@@ -53,7 +53,7 @@ const phdStudents = [
     portfolio: "https://scholar.google.com.mx/citations?user=klBIkcMAAAAJ&hl=es",
     thesis: "Intelligent Assistant to support caregivers of people with dementia.",
     link: null, 
-    image: "../assets/members/Eduardo.jpg"
+    image: "../public/members/Eduardo.jpg"
   }
 ];
 
@@ -69,7 +69,7 @@ const mastersStudents = [
     name: "Tania Arisdelci Barreras Díaz",
     thesis: "Rediseño de una plataforma tecnológica para el monitoreo de pacientes con demencia para su adopción en distintos centros de día",
     link: null,
-    image: "../assets/members/tania.png"
+    image: "../public/members/tania.png"
   },
   {
     name: "Marco Antonio Esquer Rochin",
@@ -81,7 +81,7 @@ const mastersStudents = [
     name: "Jesús José González Vázquez",
     thesis: "Diseño de una arquitectura hardware para el aseguramiento del CAN Bus",
     link: null,
-    image: "../assets/members/jesus.png"
+    image: "../public/members/jesus.png"
   },
   {
     name: "Simón Guadalupe Cornejo Sifuentes",
@@ -483,13 +483,6 @@ const undergraduateStudents = [
                                             </svg>
                                         </a>
                                     )}
-                                    {member.portfolio && (
-                                            <a href={member.portfolio} target="_blank" class="text-slate-400 hover:text-brand-primary transition-colors" title="View Portfolio">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
-                                                </svg>
-                                            </a>
-                                        )}
                                 </div>
                                 <p class="text-xs font-bold text-brand-primary uppercase tracking-wide mb-1">Thesis: </p>
                                 <p class="text-sm text-slate-600 leading-snug mt-1">
@@ -531,13 +524,6 @@ const undergraduateStudents = [
                                             </svg>
                                         </a>
                                     )}
-                                    {member.portfolio && (
-                                            <a href={member.portfolio} target="_blank" class="text-slate-400 hover:text-brand-primary transition-colors" title="View Portfolio">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
-                                                </svg>
-                                            </a>
-                                        )}
                                 </div>
                                 <p class="text-xs font-bold text-brand-primary uppercase tracking-wide mb-1">Thesis: </p>
                                 <p class="text-xs text-slate-500 truncate" title={member.thesis}>
