@@ -1,7 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 
-const key = "3ad5dece-7727-41d9-9c19-0664903622e6"; 
+const FORM_ACCESS_KEY = "3ad5dece-7727-41d9-9c19-0664903622e6"; 
 ---
 
 <Layout>
@@ -60,6 +60,7 @@ const key = "3ad5dece-7727-41d9-9c19-0664903622e6";
                             </div>
                         </div>
 
+
                     </div>
                 </div>
 
@@ -70,7 +71,7 @@ const key = "3ad5dece-7727-41d9-9c19-0664903622e6";
 
                     <form action="https://api.web3forms.com/submit" method="POST" class="space-y-6">
                         
-                        <input type="hidden" name="access_key" value={key}>
+                        <input type="hidden" name="access_key" value={FORM_ACCESS_KEY}>
                         
                         <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
 
