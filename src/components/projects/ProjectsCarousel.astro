@@ -69,7 +69,12 @@ const projects = filterTag
         modules: [Navigation, Autoplay],
         slidesPerView: 1,
         spaceBetween: 32,
-        loop: true,
+
+        // ELimitar elementos
+        loop: document.querySelectorAll('.swiper-slide').length > 3,
+
+        // Solo muestra flechas si son necesarias
+        watchOverflow: true,
 
         navigation: {
             nextEl: ".swiper-button-next",
@@ -83,9 +88,11 @@ const projects = filterTag
         },
 
         breakpoints: {
-            640: { slidesPerView: 1.2 },
+            640: { slidesPerView: 1 },
             768: { slidesPerView: 2 },
-            1024: { slidesPerView: 3 },
+            1024: {
+                slidesPerView: Math.min(3, document.querySelectorAll('.swiper-slide').length)
+            },
         },
     });
 </script>
