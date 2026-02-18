@@ -1,13 +1,12 @@
 ---
-import MemberCard from '../components/MemberCard.astro';
-
-import fotoLuis from '../assets/members/luis.jpg';
-import fotoEduardo from '../assets/members/Eduardo.jpg';
-import fotoSergio from '../assets/members/Sergio.png';
-import fotoTania from '../assets/members/tania.png';
-import fotoJesus from '../assets/members/jesus.png';
-import fotoEnrique from '../assets/members/Enrique.jpg';
-import fotoMarco from '../assets/members/M_esquer-293x300.png';
+import MemberCard from './MemberCard.astro';
+import fotoLuis from '../../assets/members/luis.jpg';
+import fotoEduardo from '../../assets/members/Eduardo.jpg';
+import fotoSergio from '../../assets/members/Sergio.png';
+import fotoTania from '../../assets/members/tania.png';
+import fotoJesus from '../../assets/members/jesus.png';
+import fotoEnrique from '../../assets/members/Enrique.jpg';
+import fotoMarco from '../../assets/members/M_esquer-293x300.png';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -15,11 +14,13 @@ import 'swiper/css/pagination';
 ---
 
 <section class="px-20 bg-white ">
+
     <div class="max-w-7xl mx-auto px-6 flex gap-4">
-        <h2 class="text-5xl font-bold text-[#001452] tracking-tight">
+        <h2 class="text-5xl font-bold text-[#001452] font- tracking-tight">
             Team Members
         </h2>
     </div>
+
     <div class="swiper mySwiper !p-15">
         <div class="swiper-wrapper">
             <div class="swiper-slide">
@@ -72,39 +73,9 @@ import 'swiper/css/pagination';
                         image={fotoMarco}
                         bio="..."/>
             </div>
-
         </div>
-
         <div class="swiper-button-next !text-brand-secondary"></div>
         <div class="swiper-button-prev !text-brand-secondary"></div>
         <div class="swiper-pagination"></div>
     </div>
 </section>
-
-<script is:inline>
-    import Swiper from 'swiper';
-    import { Navigation, Pagination } from 'swiper/modules';
-
-    document.addEventListener('DOMContentLoaded', () => {
-        new Swiper('.mySwiper', {
-            modules: [Navigation, Pagination],
-            slidesPerView: 3,
-            spaceBetween: 50,
-            centeredSlides: true,
-            loop: true,
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-            },
-            breakpoints: {
-                320: { slidesPerView: 1 },
-                768: { slidesPerView: 2 },
-                1024: { slidesPerView: 3 }
-            }
-        });
-    });
-</script>

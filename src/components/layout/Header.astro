@@ -1,8 +1,5 @@
 ---
-import ButtonGroup from "./ButtonGroup.astro";
-import LinkButton from "./LinkButton.astro";
-
-const { isHome = false } = Astro.props;
+import ButtonGroup from "../ui/ButtonGroup.astro";
 ---
 
 <header
@@ -10,7 +7,7 @@ const { isHome = false } = Astro.props;
         class="fixed top-0 left-0 w-full z-50 bg-white"
 >
     <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-        <a href="/" class="flex items-center gap-3">
+        <a href="/public" class="flex items-center gap-3">
             <img src="/images/logo_ACISLAB.png" alt="ACISLAB" class="h-10" />
         </a>
 
