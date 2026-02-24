@@ -1,99 +1,101 @@
 ---
-import {getCollection} from "astro:content";
+import { getCollection } from "astro:content";
 import ProjectCard from "./ProjectCard.astro";
 
 const allprojects = await getCollection("projects");
 
 interface Props {
-    title?: string;
-    filterTag?: string;
+  title?: string;
+  filterTag?: string;
 }
 
-const {title = "Projects", filterTag} = Astro.props;
+const { title = "Projects", filterTag } = Astro.props;
 
 const projects = filterTag
-    ? allprojects.filter(p => p.data.tags?.includes(filterTag))
-    : allprojects;
+  ? allprojects.filter((p) => p.data.tags?.includes(filterTag))
+  : allprojects;
 ---
 
 <section class="w-full py-24 bg-white">
-    <div class="max-w-7xl mx-auto px-6 mb-12 flex items-center justify-between">
-        <h2 class="text-4xl font-bold text-brand-secondary">{title}</h2>
+  <div class="max-w-7xl mx-auto px-6 mb-12 flex items-center justify-between">
+    <h2 class="text-4xl font-bold text-brand-secondary">{title}</h2>
 
-        <a href="/Projects"
-           class="text-brand-primary font-medium flex items-center gap-2 hover:underline">
-            View all
-            <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="w-4 h-4"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    stroke-width="2"
-            >
-                <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M9 5l7 7-7 7"></path>
-            </svg>
-        </a>
-    </div>
+    <a
+      href="/Projects"
+      class="text-brand-primary font-medium flex items-center gap-2 hover:underline"
+    >
+      View all
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="w-4 h-4"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"
+        ></path>
+      </svg>
+    </a>
+  </div>
 
-    <div class="relative px-6 max-w-7xl mx-auto">
-        <div class="swiper projectsSwiper !p-15">
-           <div class="swiper-wrapper">
-                   {
-                       projects.map((project) => (
-                               <div class="swiper-slide h-auto">
-                                   <ProjectCard project={project}/>
-                               </div>
-                       ))
-                   }
-           </div>
-            <div class="swiper-button-next !text-brand-secondary"></div>
-            <div class="swiper-button-prev !text-brand-secondary"></div>
-            <div class="swiper-pagination"></div>
-        </div>
+  <div class="relative px-6 max-w-7xl mx-auto">
+    <div class="swiper projectsSwiper !p-15">
+      <div class="swiper-wrapper">
+        {
+          projects.map((project) => (
+            <div class="swiper-slide h-auto">
+              <ProjectCard project={project} />
+            </div>
+          ))
+        }
+      </div>
+      <div class="swiper-button-next !text-brand-secondary"></div>
+      <div class="swiper-button-prev !text-brand-secondary"></div>
+      <div class="swiper-pagination"></div>
     </div>
+  </div>
 </section>
 
 <script>
-    import Swiper from "swiper";
-    import { Navigation, Autoplay } from "swiper/modules";
+  import Swiper from "swiper";
+  import { Navigation, Autoplay } from "swiper/modules";
 
-    import 'swiper/css';
-    import 'swiper/css/navigation';
-    import 'swiper/css/autoplay';
+  import "swiper/css";
+  import "swiper/css/navigation";
+  import "swiper/css/autoplay";
 
-    new Swiper(".projectsSwiper", {
-        modules: [Navigation, Autoplay],
-        slidesPerView: 1,
-        spaceBetween: 32,
+  new Swiper(".projectsSwiper", {
+    modules: [Navigation, Autoplay],
+    slidesPerView: 1,
+    spaceBetween: 32,
 
-        // ELimitar elementos
-        loop: document.querySelectorAll('.swiper-slide').length > 3,
+    // ELimitar elementos
+    loop: document.querySelectorAll(".swiper-slide").length > 3,
 
-        // Solo muestra flechas si son necesarias
-        watchOverflow: true,
+    // Solo mostrar las flechas si son necesarias
+    watchOverflow: true,
 
-        navigation: {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
-        },
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
 
-        autoplay: {
-            delay: 2500,
-            disableOnInteraction: false,
-            pauseOnMouseEnter: true,
-        },
+    autoplay: {
+      delay: 2500,
+      disableOnInteraction: false,
+      pauseOnMouseEnter: true,
+    },
 
-        breakpoints: {
-            640: { slidesPerView: 1 },
-            768: { slidesPerView: 2 },
-            1024: {
-                slidesPerView: Math.min(3, document.querySelectorAll('.swiper-slide').length)
-            },
-        },
-    });
+    breakpoints: {
+      640: { slidesPerView: 1 },
+      768: { slidesPerView: 2 },
+      1024: {
+        slidesPerView: Math.min(
+          3,
+          document.querySelectorAll(".swiper-slide").length,
+        ),
+      },
+    },
+  });
 </script>
-

@@ -1,0 +1,79 @@
+---
+// Importamos los estilos base de Swiper aquí para que sean globales al componente
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+---
+
+<div class="swiper mySwiper">
+    <div class="swiper-wrapper">
+        <slot />
+    </div>
+
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-pagination"></div>
+</div>
+
+<style>
+    /* Recuperamos exactamente tus estilos originales */
+    .swiper {
+        width: 100%;
+        overflow: hidden !important;
+        padding-bottom: 150px !important;
+        padding-top: 200px !important; /* El padding que te gustaba */
+    }
+
+    .swiper-slide {
+        display: flex;
+        justify-content: flex-start;
+        transition: z-index 0.8s;
+        /* Importante: para que el z-index funcione en el hover */
+        position: relative;
+    }
+
+    .swiper-slide:hover {
+        z-index: 50;
+    }
+
+    /* Opcional: Asegúrate de que las flechas se vean bien con el padding */
+    :global(.swiper-button-next),
+    :global(.swiper-button-prev) {
+        top: 50% !important;
+    }
+</style>
+
+<script>
+    import Swiper from "swiper";
+    import { Navigation, Pagination } from "swiper/modules";
+
+    const setupSwiper = () => {
+        new Swiper(".mySwiper", {
+            modules: [Navigation, Pagination],
+            slidesPerView: 3,
+            spaceBetween: 50,
+            centeredSlides: true,
+            loop: true,
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+            breakpoints: {
+                320: { slidesPerView: 1 },
+                768: { slidesPerView: 2 },
+                1024: { slidesPerView: 3 },
+            },
+        });
+    };
+
+    // Esto inicializa el Swiper al cargar la página por primera vez
+    setupSwiper();
+
+    // ESTO ES CLAVE EN ASTRO:
+    // Si usas ViewTransitions, se vuelve a ejecutar al cambiar de página
+    document.addEventListener("astro:page-load", setupSwiper);
+</script>

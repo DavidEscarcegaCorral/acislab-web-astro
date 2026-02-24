@@ -3,99 +3,96 @@ import Layout from "../layouts/Layout.astro";
 import ProjectCarousel from "../components/projects/ProjectsCarousel.astro";
 
 const publicationsRepresentative = [
-    {
-        title: "Cognitive Status of People with Dementia and its Relation to the Performance in Touch and Tangible Tasks. Current Alzheimer research.",
-        url: "https://doi.org/10.2174/0115672050426574251114053819",
-    },
-    {
-        title: "Appraising cognitive status in dementia via touch-based reaction time: a preliminary machine learning study.",
-        url: "https://doi.org/10.5281/zenodo.16860215",
-    },
-    {
-        title: "Design and Evaluation of a Dashboard to Support the Comprehension of the Progression of Patients with Dementia in Day Centers.",
-        url: "https://doi.org/10.1016/j.ijmedinf.2021.104617",
-    },
-    {
-        title: "An intelligent assistant to provide social support to informal caregivers of people with dementia: Alzaid Assistant.",
-        url: "https://ieeexplore.ieee.org/document/10101910/",
-    },
+  {
+    title:
+      "Cognitive Status of People with Dementia and its Relation to the Performance in Touch and Tangible Tasks. Current Alzheimer research.",
+    url: "https://doi.org/10.2174/0115672050426574251114053819",
+  },
+  {
+    title:
+      "Appraising cognitive status in dementia via touch-based reaction time: a preliminary machine learning study.",
+    url: "https://doi.org/10.5281/zenodo.16860215",
+  },
+  {
+    title:
+      "Design and Evaluation of a Dashboard to Support the Comprehension of the Progression of Patients with Dementia in Day Centers.",
+    url: "https://doi.org/10.1016/j.ijmedinf.2021.104617",
+  },
+  {
+    title:
+      "An intelligent assistant to provide social support to informal caregivers of people with dementia: Alzaid Assistant.",
+    url: "https://ieeexplore.ieee.org/document/10101910/",
+  },
 ];
 ---
 
 <Layout>
-    <main class="w-full">
-        <section class="w-full py-24 bg-slate-50 px-6">
-            <div class="max-w-4xl mx-auto text-center">
-                <span
-                    class="text-brand-primary font-bold tracking-wider uppercase text-sm mb-2 block"
+  <main class="w-full">
+    <section class="w-full py-24 bg-slate-50 px-6">
+      <div class="max-w-4xl mx-auto text-center">
+        <span
+          class="text-brand-primary font-bold tracking-wider uppercase text-sm mb-2 block"
+        >
+          Research Area
+        </span>
+        <h1 class="text-4xl md:text-5xl font-bold text-brand-secondary mb-6">
+          Healthcare Systems
+        </h1>
+        <h2 class="text-xl text-slate-700 font-medium mb-8">
+          Innovating for better patient care and medical efficiency
+        </h2>
+        <p class="text-lg text-slate-600 leading-relaxed">
+          Our research in Healthcare Systems focuses on developing intelligent
+          solutions to support decision-making in medical environments. We apply
+          machine learning and software engineering principles to create tools
+          that assist caregivers, improve diagnosis accuracy, and enhance the
+          quality of life for patients with chronic conditions.
+        </p>
+      </div>
+    </section>
+
+    <ProjectCarousel title="Related Projects" filterTag="Healthcare" />
+
+    <section class="w-full py-16 bg-white px-6">
+      <div class="relative px-6 max-w-7xl mx-auto">
+        <h3 class="text-3xl font-bold text-brand-secondary mb-8 text-left">
+          Representative Publications
+        </h3>
+
+        <ul class="space-y-4">
+          {
+            publicationsRepresentative.map((pub) => (
+              <li class="group">
+                <a
+                  href={pub.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="flex items-start gap-3 text-lg font-medium text-slate-700 hover:text-brand-primary transition-colors"
                 >
-                    Research Area
-                </span>
-                <h1
-                    class="text-4xl md:text-5xl font-bold text-brand-secondary mb-6"
-                >
-                    Healthcare Systems
-                </h1>
-                <h2 class="text-xl text-slate-700 font-medium mb-8">
-                    Innovating for better patient care and medical efficiency
-                </h2>
-                <p class="text-lg text-slate-600 leading-relaxed">
-                    Our research in Healthcare Systems focuses on developing
-                    intelligent solutions to support decision-making in medical
-                    environments. We apply machine learning and software
-                    engineering principles to create tools that assist
-                    caregivers, improve diagnosis accuracy, and enhance the
-                    quality of life for patients with chronic conditions.
-                </p>
-            </div>
-        </section>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="w-5 h-5 mt-1 flex-shrink-0 text-brand-primary/60 group-hover:text-brand-primary"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
 
-        <ProjectCarousel title="Related Projects" filterTag="Healthcare" />
-
-        <section class="w-full py-16 bg-white px-6">
-           <div class="relative px-6 max-w-7xl mx-auto">
-                <h3
-                    class="text-3xl font-bold text-brand-secondary mb-8 text-left"
-                >
-                    Representative Publications
-                </h3>
-
-                <ul class="space-y-4">
-                    {
-                        publicationsRepresentative.map((pub) => (
-                            <li class="group">
-                                <a
-                                    href={pub.url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    class="flex items-start gap-3 text-lg font-medium text-slate-700 hover:text-brand-primary transition-colors"
-                                >
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        class="w-5 h-5 mt-1 flex-shrink-0 text-brand-primary/60 group-hover:text-brand-primary"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        stroke="currentColor"
-                                        stroke-width="2"
-                                    >
-                                        <path
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            d="M9 5l7 7-7 7"
-                                        />
-                                    </svg>
-
-                                    <span class="group-hover:underline decoration-2 underline-offset-4 decoration-brand-primary/30">
-                                        {pub.title}
-                                    </span>
-                                </a>
-                            </li>
-                        ))
-                    }
-                </ul>
-            </div>
-        </section>
-
-        
-    </main>
+                  <span class="group-hover:underline decoration-2 underline-offset-4 decoration-brand-primary/30">
+                    {pub.title}
+                  </span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
+  </main>
 </Layout>

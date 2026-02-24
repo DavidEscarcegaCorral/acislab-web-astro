@@ -11,13 +11,15 @@
   "dependencies": {
     "@astrojs/mdx": "^4.3.13",
     "@fontsource-variable/geist": "^5.2.8",
-    "@tailwindcss/vite": "^4.1.18",
+    "@tailwindcss/vite": "^4.2.1",
     "aos": "^2.3.4",
     "astro": "^5.17.1",
     "swiper": "^12.1.0",
-    "tailwindcss": "^4.1.18"
+    "tailwindcss": "^4.2.1"
   },
   "devDependencies": {
-    "@types/aos": "^3.0.7"
+    "@types/aos": "^3.0.7",
+    "prettier": "3.8.1",
+    "prettier-plugin-astro": "^0.14.1"
   }
 }
