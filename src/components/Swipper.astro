@@ -1,5 +1,4 @@
 ---
-// Importamos los estilos base de Swiper aquí para que sean globales al componente
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -16,27 +15,23 @@ import "swiper/css/pagination";
 </div>
 
 <style>
-    /* Recuperamos exactamente tus estilos originales */
     .swiper {
         width: 100%;
         overflow: hidden !important;
         padding-bottom: 150px !important;
-        padding-top: 200px !important; /* El padding que te gustaba */
+        padding-top: 200px !important;
     }
 
     .swiper-slide {
         display: flex;
         justify-content: flex-start;
         transition: z-index 0.8s;
-        /* Importante: para que el z-index funcione en el hover */
         position: relative;
     }
-
     .swiper-slide:hover {
         z-index: 50;
     }
 
-    /* Opcional: Asegúrate de que las flechas se vean bien con el padding */
     :global(.swiper-button-next),
     :global(.swiper-button-prev) {
         top: 50% !important;
@@ -70,10 +65,5 @@ import "swiper/css/pagination";
         });
     };
 
-    // Esto inicializa el Swiper al cargar la página por primera vez
     setupSwiper();
-
-    // ESTO ES CLAVE EN ASTRO:
-    // Si usas ViewTransitions, se vuelve a ejecutar al cambiar de página
-    document.addEventListener("astro:page-load", setupSwiper);
 </script>
