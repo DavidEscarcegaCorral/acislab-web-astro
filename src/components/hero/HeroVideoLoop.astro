@@ -1,5 +1,5 @@
 ---
-
+const 
 ---
 
 <div class="[perspective:1000px">
@@ -35,8 +35,8 @@
 </div>
 
 <script>
-  const v1 = document.getElementById("video1");
-  const v2 = document.getElementById("video2");
+  const v1 = document.getElementById("video1") as HTMLVideoElement | null;
+  const v2 = document.getElementById("video2") as HTMLVideoElement | null;;
 
   function playSequence() {
     if (!v1 || !v2) return;
