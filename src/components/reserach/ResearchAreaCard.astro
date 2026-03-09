@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import { Image } from "astro:assets";
 
 interface Props {
   title: string;
@@ -12,8 +12,7 @@ const { title, description, image, link = "#" } = Astro.props;
 ---
 
 <article
-  class="
-    bg-white
+  class="bg-white
     border border-gray-100
     rounded-2xl
     overflow-hidden
@@ -22,11 +21,9 @@ const { title, description, image, link = "#" } = Astro.props;
     transition-all duration-300
     hover:shadow-md
     hover:-translate-y-1
-    group
-  "
+    group"
 >
   <a href={link} class="flex flex-col h-full w-full">
-
     <div class="relative aspect-[3/2] overflow-hidden">
       <Image
         src={image}
@@ -54,10 +51,11 @@ const { title, description, image, link = "#" } = Astro.props;
           viewBox="0 0 24 24"
           fill="currentColor"
         >
-          <path d="m13.172 12l-4.95-4.95l1.414-1.414L16 12l-6.364 6.364l-1.414-1.414z" />
+          <path
+            d="m13.172 12l-4.95-4.95l1.414-1.414L16 12l-6.364 6.364l-1.414-1.414z"
+          ></path>
         </svg>
       </div>
-
     </div>
   </a>
 </article>

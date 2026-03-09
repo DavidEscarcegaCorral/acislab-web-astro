@@ -1,81 +1,81 @@
 ---
-import MemberCard from './MemberCard.astro';
-import fotoLuis from '../../assets/members/luis.jpg';
-import fotoEduardo from '../../assets/members/Eduardo.jpg';
-import fotoSergio from '../../assets/members/Sergio.png';
-import fotoTania from '../../assets/members/tania.png';
-import fotoJesus from '../../assets/members/jesus.png';
-import fotoEnrique from '../../assets/members/Enrique.jpg';
-import fotoMarco from '../../assets/members/M_esquer-293x300.png';
+import Swipper from "../Swipper.astro";
+import MemberCard from "./MemberCard.astro";
+import fotoLuis from "../../assets/members/luis.jpg";
+import fotoEduardo from "../../assets/members/Eduardo.jpg";
+import fotoSergio from "../../assets/members/Sergio.png";
+import fotoTania from "../../assets/members/tania.png";
+import fotoJesus from "../../assets/members/jesus.png";
+import fotoEnrique from "../../assets/members/Enrique.jpg";
+import fotoMarco from "../../assets/members/M_esquer-293x300.png";
 
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 ---
 
-<section class="px-20 bg-white ">
-
+<section class="px-20 bg-white">
     <div class="max-w-7xl mx-auto px-6 flex gap-4">
-        <h2 class="text-5xl font-bold text-[#001452] font- tracking-tight">
+        <h2 class="text-5xl font-bold text-[#001452] font-tracking-tight">
             Team Members
         </h2>
     </div>
-
-    <div class="swiper mySwiper !p-15">
-        <div class="swiper-wrapper">
-            <div class="swiper-slide">
-                <MemberCard
-                        name="Luis - Felipe Rodriguez"
-                        role="Group Leader"
-                        image={fotoLuis}
-                        bio="I am a full professor in the Department of Computer Science & Design at Instituto Tecnológico de Sonora, México. My research areas include computational modeling of emotions for virtual agents, cognitive agent archite."
-                />
-            </div>
-            <div class="swiper-slide text">
-                <MemberCard
-                        name="Eduardo Islas"
-                        role="PhD Student"
-                        image={fotoEduardo}
-                        bio="I'm working on the design and development of an Intelligent Assistant to provide social support to informal caregivers of people with Alzheimer's and other dementias."/>
-            </div>
-            <div class="swiper-slide">
-                <MemberCard
-                        name="Sergio Castellanos"
-                        role="PhD Student"
-                        image={fotoSergio}
-                        bio="..."/>
-            </div>
-            <div class="swiper-slide">
-                <MemberCard
-                        name="Tania Barreras"
-                        role="MSc Student"
-                        image={fotoTania}
-                        bio="..."/>
-            </div>
-            <div class="swiper-slide">
-                <MemberCard
-                        name="Jesus Gonzáles"
-                        role="MSc Student"
-                        image={fotoJesus}
-                        bio="..."/>
-            </div>
-            <div class="swiper-slide">
-                <MemberCard
-                        name="Enrique Osuna"
-                        role="PhD sutdent"
-                        image={fotoEnrique}
-                        bio="..."/>
-            </div>
-            <div class="swiper-slide">
-                <MemberCard
-                        name="Marco Esquer"
-                        role="PhD sutdent"
-                        image={fotoMarco}
-                        bio="..."/>
-            </div>
+    <Swipper>
+        <div class="swiper-slide">
+            <MemberCard
+                name="Luis - Felipe Rodriguez"
+                role="Group Leader"
+                image={fotoLuis}
+                bio="I am a full professor in the Department of Computer Science & Design at Instituto Tecnológico de Sonora, México. My research areas include computational modeling of emotions for virtual agents, cognitive agent archite."
+            />
         </div>
-        <div class="swiper-button-next !text-brand-secondary"></div>
-        <div class="swiper-button-prev !text-brand-secondary"></div>
-        <div class="swiper-pagination"></div>
-    </div>
+        <div class="swiper-slide">
+            <MemberCard
+                name="Eduardo Islas"
+                role="PhD Student"
+                image={fotoEduardo}
+                bio="I'm working on the design and development of an Intelligent Assistant to provide social support to informal caregivers of people with Alzheimer's and other dementias."
+            />
+        </div>
+        <div class="swiper-slide">
+            <MemberCard
+                name="Sergio Castellanos"
+                role="PhD Student"
+                image={fotoSergio}
+                bio="..."
+            />
+        </div>
+        <div class="swiper-slide">
+            <MemberCard
+                name="Tania Barreras"
+                role="MSc Student"
+                image={fotoTania}
+                bio="..."
+            />
+        </div>
+        <div class="swiper-slide">
+            <MemberCard
+                name="Jesus Gonzáles"
+                role="MSc Student"
+                image={fotoJesus}
+                bio="..."
+            />
+        </div>
+        <div class="swiper-slide text-">
+            <MemberCard
+                name="Enrique Osuna"
+                role="PhD sutdent"
+                image={fotoEnrique}
+                bio="..."
+            />
+        </div>
+        <div class="swiper-slide">
+            <MemberCard
+                name="Marco Esquer"
+                role="PhD sutdent"
+                image={fotoMarco}
+                bio="..."
+            />
+        </div>
+    </Swipper>
 </section>

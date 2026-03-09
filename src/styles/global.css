@@ -1,19 +1,25 @@
 @import "tailwindcss";
 
 @theme {
-    /* Colors ASCISLAB */
-    --color-brand-primary: #1990C3;
-    --color-brand-secondary: #2b7efd;
-    --color-acislab-blue: #155cfa;
-    --color-acislab-gray: #757575;
-    --color-card-gray: #EDEDED;
+  /* Colors ASCISLAB */
+  --color-brand-primary: #1990c3;
+  --color-brand-secondary: #2b7efd;
+  --color-acislab-blue: #155cfa;
+  --color-acislab-gray: #757575;
+  --color-card-gray: #ededed;
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(15px); }
-    to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .animate-fade-in {
-    animation: fadeIn 1s ease-out forwards;
+  animation: fadeIn 1s ease-out forwards;
 }

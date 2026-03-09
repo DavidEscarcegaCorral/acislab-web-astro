@@ -3,19 +3,18 @@ import Layout from "../layouts/Layout.astro";
 import Hero from "../components/hero/Hero.astro";
 import About from "../components/About.astro";
 import ProjectsCarousel from "../components/projects/ProjectsCarousel.astro";
-import MembersCardsSection from '../components/members/MembersCardsSection.astro';
+import MembersCardsSection from "../components/members/MembersCardsSection.astro";
 import ResearchAreas from "../components/reserach/ResearchAreas.astro";
 import ResearchVisionSection from "../components/reserach/ResearchVisionSection.astro";
-
 ---
 
 <Layout isHome={true}>
-    <main class="flex flex-col gap-y-10 w-full px-4 md:px-0">
-        <Hero/>
-        <About/>
-        <ResearchAreas/>
-        <ProjectsCarousel/>
-        <ResearchVisionSection/>
-        <MembersCardsSection/>
-    </main>
+  <main class="flex flex-col gap-y-10 w-full px-4 md:px-0">
+    <Hero />
+    <About />
+    <ResearchAreas />
+    <ProjectsCarousel />
+    <ResearchVisionSection />
+    <MembersCardsSection />
+  </main>
 </Layout>

@@ -1,0 +1,69 @@
+---
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+---
+
+<div class="swiper mySwiper">
+    <div class="swiper-wrapper">
+        <slot />
+    </div>
+
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-pagination"></div>
+</div>
+
+<style>
+    .swiper {
+        width: 100%;
+        overflow: hidden !important;
+        padding-bottom: 150px !important;
+        padding-top: 200px !important;
+    }
+
+    .swiper-slide {
+        display: flex;
+        justify-content: flex-start;
+        transition: z-index 0.8s;
+        position: relative;
+    }
+    .swiper-slide:hover {
+        z-index: 50;
+    }
+
+    :global(.swiper-button-next),
+    :global(.swiper-button-prev) {
+        top: 50% !important;
+    }
+</style>
+
+<script>
+    import Swiper from "swiper";
+    import { Navigation, Pagination } from "swiper/modules";
+
+    const setupSwiper = () => {
+        new Swiper(".mySwiper", {
+            modules: [Navigation, Pagination],
+            slidesPerView: 3,
+            spaceBetween: 50,
+            centeredSlides: true,
+            loop: true,
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+            breakpoints: {
+                320: { slidesPerView: 1 },
+                768: { slidesPerView: 2 },
+                1024: { slidesPerView: 3 },
+            },
+        });
+    };
+
+    setupSwiper();
+</script>
