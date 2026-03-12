@@ -2,22 +2,33 @@
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+
+interface Props {
+    id?: string;
+}
+
+const { id = "swiper-" + Math.random().toString(36).slice(2, 7) } = Astro.props;
 ---
 
-<div class="swiper mySwiper">
-    <div class="swiper-wrapper">
-        <slot />
+<div class="swiper-container">
+    <div class={`swiper ${id}`}>
+        <div class="swiper-wrapper">
+            <slot />
+        </div>
+        <div class={`swiper-button-next ${id}-next`}></div>
+        <div class={`swiper-button-prev ${id}-prev`}></div>
+        <div class={`swiper-pagination ${id}-pagination`}></div>
     </div>
-
-    <div class="swiper-button-next"></div>
-    <div class="swiper-button-prev"></div>
-    <div class="swiper-pagination"></div>
 </div>
 
 <style>
+    .swiper-container {
+        width: 100%;
+        overflow: hidden;
+    }
+
     .swiper {
         width: 100%;
-        overflow: hidden !important;
         padding-bottom: 150px !important;
         padding-top: 200px !important;
     }
@@ -28,6 +39,7 @@ import "swiper/css/pagination";
         transition: z-index 0.8s;
         position: relative;
     }
+
     .swiper-slide:hover {
         z-index: 50;
     }
@@ -38,23 +50,26 @@ import "swiper/css/pagination";
     }
 </style>
 
-<script>
+<script define:vars={{ id }}>
     import Swiper from "swiper";
     import { Navigation, Pagination } from "swiper/modules";
 
-    const setupSwiper = () => {
-        new Swiper(".mySwiper", {
+    const initSwiper = () => {
+        const el = document.querySelector(`.${id}`);
+        if (el?.swiper) el.swiper.destroy(true, true);
+
+        new Swiper(`.${id}`, {
             modules: [Navigation, Pagination],
             slidesPerView: 3,
             spaceBetween: 50,
             centeredSlides: true,
             loop: true,
             navigation: {
-                nextEl: ".swiper-button-next",
-                prevEl: ".swiper-button-prev",
+                nextEl: `.${id}-next`,
+                prevEl: `.${id}-prev`,
             },
             pagination: {
-                el: ".swiper-pagination",
+                el: `.${id}-pagination`,
                 clickable: true,
             },
             breakpoints: {
@@ -65,5 +80,6 @@ import "swiper/css/pagination";
         });
     };
 
-    setupSwiper();
+    initSwiper();
+    document.addEventListener("astro:page-load", initSwiper);
 </script>
