@@ -4,7 +4,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 interface Props {
-    id?: string;
+    id?: String;
 }
 
 const { id = "swiper-" + Math.random().toString(36).slice(2, 7) } = Astro.props;
@@ -12,7 +12,7 @@ const { id = "swiper-" + Math.random().toString(36).slice(2, 7) } = Astro.props;
 
 <div class="swiper-container">
     <div class={`swiper ${id}`}>
-        <div class="swiper-wrapper">
+        <div class="siper-wrapper">
             <slot />
         </div>
         <div class={`swiper-button-next ${id}-next`}></div>
@@ -22,7 +22,7 @@ const { id = "swiper-" + Math.random().toString(36).slice(2, 7) } = Astro.props;
 </div>
 
 <style>
-    .swiper-container {
+    .swper-container {
         width: 100%;
         overflow: hidden;
     }
