@@ -1,5 +1,5 @@
 ---
-import Swipper from "../Swipper.astro";
+import Swiper from "../Swiper.astro";
 import MemberCard from "./MemberCard.astro";
 import fotoLuis from "../../assets/members/luis.jpg";
 import fotoEduardo from "../../assets/members/Eduardo.jpg";
@@ -8,10 +8,6 @@ import fotoTania from "../../assets/members/tania.png";
 import fotoJesus from "../../assets/members/jesus.png";
 import fotoEnrique from "../../assets/members/Enrique.jpg";
 import fotoMarco from "../../assets/members/M_esquer-293x300.png";
-
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
 ---
 
 <section class="px-20 bg-white">
@@ -20,7 +16,8 @@ import "swiper/css/pagination";
             Team Members
         </h2>
     </div>
-    <Swipper>
+
+    <Swiper id="members-swiper">
         <div class="swiper-slide">
             <MemberCard
                 name="Luis - Felipe Rodriguez"
@@ -61,10 +58,10 @@ import "swiper/css/pagination";
                 bio="..."
             />
         </div>
-        <div class="swiper-slide text-">
+        <div class="swiper-slide">
             <MemberCard
                 name="Enrique Osuna"
-                role="PhD sutdent"
+                role="PhD Student"
                 image={fotoEnrique}
                 bio="..."
             />
@@ -72,10 +69,10 @@ import "swiper/css/pagination";
         <div class="swiper-slide">
             <MemberCard
                 name="Marco Esquer"
-                role="PhD sutdent"
+                role="PhD Student"
                 image={fotoMarco}
                 bio="..."
             />
         </div>
-    </Swipper>
+    </Swiper>
 </section>
