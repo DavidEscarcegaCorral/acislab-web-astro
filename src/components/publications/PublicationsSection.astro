@@ -173,24 +173,120 @@ const years = [
                 No publications found matching your criteria.
             </p>
         </div>
+        <div
+            id="pagination"
+            class="flex justify-center items-center gap-2 mt-10"
+        >
+        </div>
     </div>
 </section>
 
 <script>
     document.addEventListener("DOMContentLoaded", () => {
         const buttons = document.querySelectorAll(".filter-btn");
-        const cards = document.querySelectorAll(".pub-card");
+        const cards = Array.from(
+            document.querySelectorAll(".pub-card"),
+        ) as HTMLElement[];
         const noResults = document.getElementById("no-results");
         const searchInput = document.getElementById(
             "search-input",
         ) as HTMLInputElement;
+        const pagination = document.getElementById("pagination");
 
+        const ITEMS_PER_PAGE = 5;
         let currentYear = "all";
         let currentSearch = "";
+        let currentPage = 1;
+
+        const getFilteredCards = () => {
+            return cards.filter((card) => {
+                const cardYear = card.getAttribute("data-year");
+                const title =
+                    card
+                        .querySelector(".pub-title")
+                        ?.textContent?.toLowerCase() || "";
+                const authors =
+                    card
+                        .querySelector(".pub-authors")
+                        ?.textContent?.toLowerCase() || "";
+                const desc =
+                    card
+                        .querySelector(".pub-desc")
+                        ?.textContent?.toLowerCase() || "";
+
+                const contentMatch =
+                    title.includes(currentSearch) ||
+                    authors.includes(currentSearch) ||
+                    desc.includes(currentSearch);
+
+                const yearMatch =
+                    currentYear === "all" || cardYear === currentYear;
+
+                return yearMatch && contentMatch;
+            });
+        };
+
+        const renderPagination = (totalItems: number) => {
+            if (!pagination) return;
+            const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
+            pagination.innerHTML = "";
+
+            if (totalPages <= 1) return;
+
+            // Botón anterior
+            const prev = document.createElement("button");
+            prev.textContent = "←";
+            prev.disabled = currentPage === 1;
+            prev.className = `px-3 py-1 rounded-full border transition-all ${
+                currentPage === 1
+                    ? "border-slate-200 text-slate-300 cursor-not-allowed"
+                    : "border-slate-300 text-slate-600 hover:border-brand-secondary hover:text-brand-secondary"
+            }`;
+            prev.addEventListener("click", () => {
+                if (currentPage > 1) {
+                    currentPage--;
+                    applyFilters();
+                }
+            });
+            pagination.appendChild(prev);
+
+            // Números de página
+            for (let i = 1; i <= totalPages; i++) {
+                const btn = document.createElement("button");
+                btn.textContent = String(i);
+                btn.className = `px-4 py-1 rounded-full border font-medium transition-all ${
+                    i === currentPage
+                        ? "bg-brand-secondary text-white border-brand-secondary"
+                        : "border-slate-300 text-slate-600 hover:border-brand-secondary hover:text-brand-secondary"
+                }`;
+                btn.addEventListener("click", () => {
+                    currentPage = i;
+                    applyFilters();
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                });
+                pagination.appendChild(btn);
+            }
+
+            // Botón siguiente
+            const next = document.createElement("button");
+            next.textContent = "→";
+            next.disabled = currentPage === totalPages;
+            next.className = `px-3 py-1 rounded-full border transition-all ${
+                currentPage === totalPages
+                    ? "border-slate-200 text-slate-300 cursor-not-allowed"
+                    : "border-slate-300 text-slate-600 hover:border-brand-secondary hover:text-brand-secondary"
+            }`;
+            next.addEventListener("click", () => {
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    applyFilters();
+                }
+            });
+            pagination.appendChild(next);
+        };
 
         const applyFilters = () => {
-            let visibleCount = 0;
-
+            // Actualizar botones de año
             buttons.forEach((btn) => {
                 const isSelected =
                     btn.getAttribute("data-year") === currentYear;
@@ -221,70 +317,45 @@ const years = [
                 }
             });
 
-            cards.forEach((card) => {
-                const cardYear = card.getAttribute("data-year");
-                const title =
-                    card
-                        .querySelector(".pub-title")
-                        ?.textContent?.toLowerCase() || "";
-                const authors =
-                    card
-                        .querySelector(".pub-authors")
-                        ?.textContent?.toLowerCase() || "";
-                const desc =
-                    card
-                        .querySelector(".pub-desc")
-                        ?.textContent?.toLowerCase() || "";
+            const filtered = getFilteredCards();
+            const start = (currentPage - 1) * ITEMS_PER_PAGE;
+            const end = start + ITEMS_PER_PAGE;
 
-                const contentMatch =
-                    title.includes(currentSearch) ||
-                    authors.includes(currentSearch) ||
-                    desc.includes(currentSearch);
+            // mostrar solo las de la página actual
+            cards.forEach((card) => (card.style.display = "none"));
+            filtered
+                .slice(start, end)
+                .forEach((card) => (card.style.display = "block"));
 
-                const yearMatch =
-                    currentYear === "all" || cardYear === currentYear;
+            if (noResults)
+                noResults.classList.toggle("hidden", filtered.length > 0);
 
-                if (yearMatch && contentMatch) {
-                    (card as HTMLElement).style.display = "block";
-                    setTimeout(() => {
-                        (card as HTMLElement).style.opacity = "1";
-                        (card as HTMLElement).style.transform = "translateY(0)";
-                    }, 10);
-                    visibleCount++;
-                } else {
-                    (card as HTMLElement).style.display = "none";
-                    (card as HTMLElement).style.opacity = "0";
-                    (card as HTMLElement).style.transform = "translateY(10px)";
-                }
-            });
-
-            if (noResults) {
-                noResults.classList.toggle("hidden", visibleCount > 0);
-            }
+            renderPagination(filtered.length);
         };
 
+        // Filtros por año
         buttons.forEach((btn) => {
             btn.addEventListener("click", () => {
                 currentYear = btn.getAttribute("data-year") || "all";
+                // resetear al filtrar
+                currentPage = 1;
                 applyFilters();
             });
         });
 
+        // Búsqueda
         if (searchInput) {
             searchInput.addEventListener("input", (e) => {
                 currentSearch = (
                     e.target as HTMLInputElement
                 ).value.toLowerCase();
+                // resetear al buscar
+                currentPage = 1;
                 applyFilters();
             });
         }
+
+        // Carga inicial
+        applyFilters();
     });
 </script>
-
-<style>
-    .pub-card {
-        transition:
-            opacity 0.3s ease-out,
-            transform 0.3s ease-out;
-    }
-</style>
