@@ -4,15 +4,15 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 interface Props {
-    id?: String;
+    id?: string;
 }
 
 const { id = "swiper-" + Math.random().toString(36).slice(2, 7) } = Astro.props;
 ---
 
 <div class="swiper-container">
-    <div class={`swiper ${id}`}>
-        <div class="siper-wrapper">
+    <div class={`swiper ${id}`} data-swiper-id={id}>
+        <div class="swiper-wrapper">
             <slot />
         </div>
         <div class={`swiper-button-next ${id}-next`}></div>
@@ -22,7 +22,7 @@ const { id = "swiper-" + Math.random().toString(36).slice(2, 7) } = Astro.props;
 </div>
 
 <style>
-    .swper-container {
+    .swiper-container {
         width: 100%;
         overflow: hidden;
     }
@@ -50,36 +50,41 @@ const { id = "swiper-" + Math.random().toString(36).slice(2, 7) } = Astro.props;
     }
 </style>
 
-<script define:vars={{ id }}>
+<!-- Script 1: módulos ES (sin define:vars) -->
+<script>
     import Swiper from "swiper";
     import { Navigation, Pagination } from "swiper/modules";
 
-    const initSwiper = () => {
-        const el = document.querySelector(`.${id}`);
-        if (el?.swiper) el.swiper.destroy(true, true);
+    const initAllSwipers = () => {
+        document.querySelectorAll("[data-swiper-id]").forEach((el) => {
+            const id = el.getAttribute("data-swiper-id");
 
-        new Swiper(`.${id}`, {
-            modules: [Navigation, Pagination],
-            slidesPerView: 3,
-            spaceBetween: 50,
-            centeredSlides: true,
-            loop: true,
-            navigation: {
-                nextEl: `.${id}-next`,
-                prevEl: `.${id}-prev`,
-            },
-            pagination: {
-                el: `.${id}-pagination`,
-                clickable: true,
-            },
-            breakpoints: {
-                320: { slidesPerView: 1 },
-                768: { slidesPerView: 2 },
-                1024: { slidesPerView: 3 },
-            },
+            // Destruir instancia previa si existe
+            if ((el as any).swiper) (el as any).swiper.destroy(true, true);
+
+            new Swiper(`.${id}`, {
+                modules: [Navigation, Pagination],
+                slidesPerView: 3,
+                spaceBetween: 50,
+                centeredSlides: true,
+                loop: true,
+                navigation: {
+                    nextEl: `.${id}-next`,
+                    prevEl: `.${id}-prev`,
+                },
+                pagination: {
+                    el: `.${id}-pagination`,
+                    clickable: true,
+                },
+                breakpoints: {
+                    320: { slidesPerView: 1 },
+                    768: { slidesPerView: 2 },
+                    1024: { slidesPerView: 3 },
+                },
+            });
         });
     };
 
-    initSwiper();
-    document.addEventListener("astro:page-load", initSwiper);
+    initAllSwipers();
+    document.addEventListener("astro:page-load", initAllSwipers);
 </script>
