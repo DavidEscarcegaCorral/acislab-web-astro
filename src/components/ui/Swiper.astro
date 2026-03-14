@@ -11,13 +11,12 @@ const { id = "swiper-" + Math.random().toString(36).slice(2, 7) } = Astro.props;
 ---
 
 <div class="swiper-container">
-    <div class={`swiper-button-next ${id}-next`}></div>
-    <div class={`swiper-button-prev ${id}-prev`}></div>
     <div class={`swiper ${id}`} data-swiper-id={id}>
         <div class="swiper-wrapper">
             <slot />
         </div>
-
+        <div class={`swiper-button-next ${id}-next`}></div>
+        <div class={`swiper-button-prev ${id}-prev`}></div>
         <div class={`swiper-pagination ${id}-pagination`}></div>
     </div>
 </div>
@@ -26,7 +25,8 @@ const { id = "swiper-" + Math.random().toString(36).slice(2, 7) } = Astro.props;
     .swiper-container {
         width: 100%;
         overflow: hidden;
-        padding: 0 50px;
+        padding: 0 60px;
+        box-sizing: border-box;
     }
 
     .swiper {
@@ -46,19 +46,12 @@ const { id = "swiper-" + Math.random().toString(36).slice(2, 7) } = Astro.props;
         z-index: 50;
     }
 
-    :global(.swiper-button-next),
     :global(.swiper-button-prev) {
-        top: 50% !important;
-        width: 40px;
-        height: 40px;
-    }
-
-    :global(.swiper-button-prev) {
-        left: 5px !important;
+        left: 0px !important;
     }
 
     :global(.swiper-button-next) {
-        right: 5px !important;
+        right: 0px !important;
     }
 </style>
 

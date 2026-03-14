@@ -6,14 +6,15 @@ import ProjectsCarousel from "../components/projects/ProjectsCarousel.astro";
 import ResearchAreas from "../components/reserach/ResearchAreas.astro";
 import ResearchVisionSection from "../components/reserach/ResearchVisionSection.astro";
 import MembersCarousel from "../components/members/MembersCarousel.astro";
+import ProjectsSection from "../components/projects/ProjectsSection.astro";
 ---
 
 <Layout isHome={true}>
     <main class="flex flex-col gap-y-10 w-full px-4 md:px-0">
         <Hero />
         <About />
+        <ProjectsSection />
         <ResearchAreas />
-        <ProjectsCarousel />
         <ResearchVisionSection />
         <MembersCarousel />
     </main>
