@@ -1,6 +1,9 @@
 // prettier.config.js
 export default {
-    plugins: ['prettier-plugin-astro', 'prettier-plugin-tailwindcss'],
+    plugins: [
+        'prettier-plugin-astro',
+        'prettier-plugin-tailwindcss',
+    ],
     overrides: [
         {
             files: '*.astro',
@@ -13,5 +16,6 @@ export default {
     semi: true,
     singleQuote: true,
     tabWidth: 4,
-    printWidth: 50,
+    printWidth: 100,
+    bracketSameLine: true,
 };
