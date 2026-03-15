@@ -1,0 +1,94 @@
+---
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+
+interface Props {
+    id?: string;
+}
+
+const { id = "swiper-" + Math.random().toString(36).slice(2, 7) } = Astro.props;
+---
+
+<div class="swiper-container">
+    <div class={`swiper ${id}`} data-swiper-id={id}>
+        <div class="swiper-wrapper">
+            <slot />
+        </div>
+        <div class={`swiper-button-next ${id}-next`}></div>
+        <div class={`swiper-button-prev ${id}-prev`}></div>
+        <div class={`swiper-pagination ${id}-pagination`}></div>
+    </div>
+</div>
+
+<style>
+    .swiper-container {
+        width: 100%;
+        overflow: hidden;
+        padding: 0 60px;
+        box-sizing: border-box;
+    }
+
+    .swiper {
+        width: 90%;
+        padding-bottom: 100px !important;
+        padding-top: 100px !important;
+    }
+
+    .swiper-slide {
+        display: flex;
+        justify-content: flex-start;
+        transition: z-index 0.8s;
+        position: relative;
+    }
+
+    .swiper-slide:hover {
+        z-index: 50;
+    }
+
+    :global(.swiper-button-prev) {
+        left: 0px !important;
+    }
+
+    :global(.swiper-button-next) {
+        right: 0px !important;
+    }
+</style>
+
+<script>
+    import Swiper from "swiper";
+    import { Navigation, Pagination } from "swiper/modules";
+
+    const initAllSwipers = () => {
+        document.querySelectorAll("[data-swiper-id]").forEach((el) => {
+            const id = el.getAttribute("data-swiper-id");
+
+            if ((el as any).swiper) (el as any).swiper.destroy(true, true);
+
+            new Swiper(`.${id}`, {
+                modules: [Navigation, Pagination],
+                slidesPerView: 3,
+                spaceBetween: 30,
+                centeredSlides: true,
+                centerInsufficientSlides: true,
+                loop: true,
+                navigation: {
+                    nextEl: `.${id}-next`,
+                    prevEl: `.${id}-prev`,
+                },
+                pagination: {
+                    el: `.${id}-pagination`,
+                    clickable: true,
+                },
+                breakpoints: {
+                    320: { slidesPerView: 1 },
+                    768: { slidesPerView: 2 },
+                    1024: { slidesPerView: 3 },
+                },
+            });
+        });
+    };
+
+    initAllSwipers();
+    document.addEventListener("astro:page-load", initAllSwipers);
+</script>
