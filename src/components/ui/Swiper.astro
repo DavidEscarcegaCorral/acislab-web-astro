@@ -1,13 +1,13 @@
 ---
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
 interface Props {
     id?: string;
 }
 
-const { id = "swiper-" + Math.random().toString(36).slice(2, 7) } = Astro.props;
+const { id = 'swiper-' + Math.random().toString(36).slice(2, 7) } = Astro.props;
 ---
 
 <div class="swiper-container">
@@ -25,12 +25,13 @@ const { id = "swiper-" + Math.random().toString(36).slice(2, 7) } = Astro.props;
     .swiper-container {
         width: 100%;
         overflow: hidden;
-        padding: 0 60px;
+        padding: 0 50px;
         box-sizing: border-box;
+        max-width: 100%;
     }
 
     .swiper {
-        width: 90%;
+        width: 100%;
         padding-bottom: 100px !important;
         padding-top: 100px !important;
     }
@@ -56,12 +57,12 @@ const { id = "swiper-" + Math.random().toString(36).slice(2, 7) } = Astro.props;
 </style>
 
 <script>
-    import Swiper from "swiper";
-    import { Navigation, Pagination } from "swiper/modules";
+    import Swiper from 'swiper';
+    import { Navigation, Pagination } from 'swiper/modules';
 
     const initAllSwipers = () => {
-        document.querySelectorAll("[data-swiper-id]").forEach((el) => {
-            const id = el.getAttribute("data-swiper-id");
+        document.querySelectorAll('[data-swiper-id]').forEach((el) => {
+            const id = el.getAttribute('data-swiper-id');
 
             if ((el as any).swiper) (el as any).swiper.destroy(true, true);
 
@@ -90,5 +91,5 @@ const { id = "swiper-" + Math.random().toString(36).slice(2, 7) } = Astro.props;
     };
 
     initAllSwipers();
-    document.addEventListener("astro:page-load", initAllSwipers);
+    document.addEventListener('astro:page-load', initAllSwipers);
 </script>

@@ -11,8 +11,7 @@ const { name, role, image, bio } = Astro.props;
 ---
 
 <div
-    class="group flex h-auto min-h-[350px] w-full max-w-[300px] flex-col items-center gap-4 overflow-hidden rounded-lg bg-[#f0f0f0] p-6 text-center transition-all duration-500 ease-in-out hover:bg-white hover:shadow-2xl md:min-h-[140px] md:max-w-[450px] md:flex-row md:items-start md:gap-6 md:text-left"
->
+    class="group flex h-auto min-h-[350px] w-full max-w-[300px] flex-col items-center gap-4 overflow-hidden rounded-lg bg-[#f0f0f0] p-6 text-center transition-all duration-500 ease-in-out hover:bg-white hover:shadow-2xl md:min-h-[140px] md:max-w-[450px] md:flex-row md:items-start md:gap-6 md:text-left">
     <div class="h-24 w-24 shrink-0 overflow-hidden rounded-full border-2 border-white shadow-sm">
         <Image src={image} alt={name} width={300} height={300} class="h-full w-full object-cover" />
     </div>
@@ -28,8 +27,7 @@ const { name, role, image, bio } = Astro.props;
         <div class="grid grid-rows-[0fr] transition-all duration-500 group-hover:grid-rows-[1fr]">
             <div class="overflow-hidden">
                 <p
-                    class="pt-3 text-sm leading-relaxed text-slate-600 opacity-0 transition-opacity delay-150 duration-300 group-hover:opacity-100"
-                >
+                    class="pt-3 text-sm leading-relaxed text-slate-600 opacity-0 transition-opacity delay-150 duration-300 group-hover:opacity-100">
                     {bio}
                 </p>
             </div>

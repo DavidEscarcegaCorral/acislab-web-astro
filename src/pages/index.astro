@@ -1,21 +1,18 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/hero/Hero.astro';
-import About from '../components/About.astro';
-import ProjectsCarousel from '../components/projects/ProjectsCarousel.astro';
-import ResearchAreas from '../components/reserach/ResearchAreas.astro';
-import ResearchVisionSection from '../components/reserach/ResearchVisionSection.astro';
-import MembersCarousel from '../components/members/MembersCarousel.astro';
+import About from '../components/info/About.astro';
+import Vision from '../components/info/Vision.astro';
 import ProjectsSection from '../components/projects/ProjectsSection.astro';
+import MembersSection from '../components/members/MembersSection.astro';
 ---
 
 <Layout isHome={true}>
-    <main class="flex w-full flex-col gap-y-10 px-4 md:px-0">
+    <main class="flex w-full flex-col px-4 md:px-0">
         <Hero />
         <About />
         <ProjectsSection />
-        <ResearchAreas />
-        <ResearchVisionSection />
-        <MembersCarousel />
+        <Vision />
+        <MembersSection />
     </main>
 </Layout>
