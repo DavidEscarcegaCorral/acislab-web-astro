@@ -1,0 +1,26 @@
+---
+import MembersCarousel from './MembersCarousel.astro';
+---
+
+<section class="relative z-10 w-full bg-white py-20 md:py-32">
+    <div class="mx-auto w-full max-w-[1600px] px-6 md:px-12 lg:px-20">
+        <div class="mb-16 flex flex-col items-center justify-center text-center">
+            <div class="flex w-full max-w-4xl items-center justify-center gap-6">
+                <div class="bg-brand-secondary/30 h-px flex-1"></div>
+                <span class="text-xl font-medium tracking-widest text-slate-500 uppercase">
+                    Team
+                </span>
+                <div class="bg-brand-secondary/30 h-px flex-1"></div>
+            </div>
+
+            <h2
+                class="text-brand-secondary mt-8 text-6xl font-bold tracking-widest uppercase md:text-8xl lg:text-[7rem]">
+                Members
+            </h2>
+        </div>
+
+        <div class="w-full">
+            <MembersCarousel />
+        </div>
+    </div>
+</section>

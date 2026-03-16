@@ -1,22 +1,16 @@
 ---
-import Swiper from "../ui/Swiper.astro";
-import MemberCard from "./MemberCard.astro";
-import fotoLuis from "../../assets/members/luis.jpg";
-import fotoEduardo from "../../assets/members/Eduardo.jpg";
-import fotoSergio from "../../assets/members/Sergio.png";
-import fotoTania from "../../assets/members/tania.png";
-import fotoJesus from "../../assets/members/jesus.png";
-import fotoEnrique from "../../assets/members/Enrique.jpg";
-import fotoMarco from "../../assets/members/M_esquer-293x300.png";
+import Swiper from '../ui/Swiper.astro';
+import MemberCard from './MemberCard.astro';
+import fotoLuis from '../../assets/members/luis.jpg';
+import fotoEduardo from '../../assets/members/Eduardo.jpg';
+import fotoSergio from '../../assets/members/Sergio.png';
+import fotoTania from '../../assets/members/tania.png';
+import fotoJesus from '../../assets/members/jesus.png';
+import fotoEnrique from '../../assets/members/Enrique.jpg';
+import fotoMarco from '../../assets/members/M_esquer-293x300.png';
 ---
 
-<section class="px-20 bg-white">
-    <div class="max-w-7xl mx-auto px-6 flex gap-4">
-        <h2 class="text-5xl font-bold text-[#001452] font-tracking-tight">
-            Team Members
-        </h2>
-    </div>
-
+<section class="bg-white">
     <Swiper id="members-swiper">
         <div class="swiper-slide">
             <MemberCard
@@ -35,44 +29,19 @@ import fotoMarco from "../../assets/members/M_esquer-293x300.png";
             />
         </div>
         <div class="swiper-slide">
-            <MemberCard
-                name="Sergio Castellanos"
-                role="PhD Student"
-                image={fotoSergio}
-                bio="..."
-            />
+            <MemberCard name="Sergio Castellanos" role="PhD Student" image={fotoSergio} bio="..." />
         </div>
         <div class="swiper-slide">
-            <MemberCard
-                name="Tania Barreras"
-                role="MSc Student"
-                image={fotoTania}
-                bio="..."
-            />
+            <MemberCard name="Tania Barreras" role="MSc Student" image={fotoTania} bio="..." />
         </div>
         <div class="swiper-slide">
-            <MemberCard
-                name="Jesus Gonzáles"
-                role="MSc Student"
-                image={fotoJesus}
-                bio="..."
-            />
+            <MemberCard name="Jesus Gonzáles" role="MSc Student" image={fotoJesus} bio="..." />
         </div>
         <div class="swiper-slide">
-            <MemberCard
-                name="Enrique Osuna"
-                role="PhD Student"
-                image={fotoEnrique}
-                bio="..."
-            />
+            <MemberCard name="Enrique Osuna" role="PhD Student" image={fotoEnrique} bio="..." />
         </div>
         <div class="swiper-slide">
-            <MemberCard
-                name="Marco Esquer"
-                role="PhD Student"
-                image={fotoMarco}
-                bio="..."
-            />
+            <MemberCard name="Marco Esquer" role="PhD Student" image={fotoMarco} bio="..." />
         </div>
     </Swiper>
 </section>
