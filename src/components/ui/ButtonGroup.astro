@@ -39,6 +39,7 @@ const links = [
 ---
 
 <div class="flex flex-col items-center justify-center gap-8 px-4 md:flex-row">
+    <!-- boton Our Research -->
     <div class="group relative">
         <LinkButton
             href="/OurResearch"
@@ -87,6 +88,7 @@ const links = [
         </div>
     </div>
 
+    <!-- Array con los links -->
     {
         links.map(({ label, href, icon }) => (
             <LinkButton href={href} active={currentPath === href}>
