@@ -1,0 +1,39 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ProjectCarousel from "../components/projects/ProjectsCarousel.astro";
+---
+
+<Layout>
+  <main class="w-full">
+    <section class="w-full py-24 bg-slate-50 px-6">
+      <div class="max-w-4xl mx-auto text-center">
+        <span
+          class="text-brand-primary font-bold tracking-wider uppercase text-sm mb-2 block"
+        >
+          Research Area
+        </span>
+        <h1 class="text-4xl md:text-5xl font-bold text-brand-secondary mb-6">
+          Health Informatics & Dementia Care
+        </h1>
+        <h2 class="text-xl text-slate-700 font-medium mb-8">
+          Innovating for better patient care and medical efficiency
+        </h2>
+        <p class="text-lg text-slate-600 leading-relaxed">
+          Our research lies at the convergence of healthcare, computer science, and 
+          information science. Our primary objective is to optimize the use of data 
+          to improve the well-being of People with Dementia (PwD) and support their 
+          caregivers, as well as to enhance healthcare delivery. We design and build 
+          computing systems to acquire and manage patient and caregivers’ data (e.g., mobile apps and IoT systems for patient monitoring). 
+          We analyze this data to identify longitudinal patterns that facilitate the prediction of disease progression and tailor personalized 
+          treatments, for example. We adhere to User-Centered Design (UCD) methodologies, validating our technological tools through rigorous 
+          usability testing to ensure clinical relevance and successful adoption in real-world scenarios.
+        </p>
+      </div>
+    </section>
+
+    <ProjectCarousel title="Related Projects" filterTag="Healthcare" />
+
+    <div class="h-16"></div>
+
+  </main>
+</Layout>

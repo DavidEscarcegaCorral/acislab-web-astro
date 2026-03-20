@@ -5,12 +5,12 @@ const currentPath = Astro.url.pathname;
 
 const researchAreas = [
     {
-        label: 'Affective Computing & Intelligent Systems',
-        href: '/AffectiveComputing',
+        label: 'Computational Modeling of Emotion & Affective HCI',
+        href: '/ComputionalModelingEmotional',
     },
     {
-        label: 'Healthcare-Centered Systems',
-        href: '/HealthCareSystems',
+        label: 'Health Informatics & Dementia Care',
+        href: '/HealthInformatics',
     },
 ];
 
@@ -46,8 +46,8 @@ const links = [
             onclick="event.preventDefault();"
             active={
                 currentPath.startsWith('/OurResearch') ||
-                currentPath.startsWith('/AffectiveComputing') ||
-                currentPath.startsWith('/HealthCare')
+                currentPath.startsWith('/ComputionalModelingEmotional') ||
+                currentPath.startsWith('/HealthInformatics')
             }
         >
             Our research

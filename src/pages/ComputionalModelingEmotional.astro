@@ -1,0 +1,40 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ProjectCarousel from "../components/projects/ProjectsCarousel.astro";
+---
+
+<Layout>
+  <main class="w-full">
+    <section class="w-full py-24 bg-slate-50 px-6">
+      <div class="max-w-4xl mx-auto text-center">
+        <span
+          class="text-brand-primary font-bold tracking-wider uppercase text-sm mb-2 block"
+        >
+          Research Area
+        </span>
+        <h1 class="text-4xl md:text-5xl font-bold text-brand-secondary mb-6">
+          Computational Modeling of Emotion & Affective HCI
+        </h1>
+        <h2 class="text-xl text-slate-700 font-medium mb-8">
+          Bridging the gap between human emotion and technology
+        </h2>
+        <p class="text-lg text-slate-600 leading-relaxed">
+          Our primary objective is to translate our understanding of human emotion
+          into computational algorithms. We formalize psychological and neuroscientific 
+          frameworks (e.g., appraisal theory, which explains how we assess events as good or bad)
+          to build computational models that enable intelligent systems to exhibit plausible emotional 
+          and social behaviors, and that provide a simulation testbed to validate theories regarding 
+          human cognition (e.g., modeling the impact of anxiety on decision-making). Furthermore, 
+          our work in Affective HCI focuses on creating adaptive systems that recognize user emotional
+          states through multimodal sensing (focusing mainly on vulnerable populations such as People with Dementia) 
+          to provide empathetic, personalized assistance.
+        </p>
+      </div>
+    </section>
+
+    <ProjectCarousel title="Related Projects" filterTag="Affective" />
+
+    <div class="h-16"></div>
+
+  </main>
+</Layout>
