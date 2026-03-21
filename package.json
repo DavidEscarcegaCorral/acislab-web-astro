@@ -9,10 +9,10 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/mdx": "^4.3.13",
+    "@astrojs/mdx": "^5.0.2",
     "@fontsource-variable/geist": "^5.2.8",
     "aos": "^2.3.4",
-    "astro": "^5.17.1",
+    "astro": "^6.0.8",
     "swiper": "^12.1.0",
     "tailwindcss": "^4.2.1"
   },
