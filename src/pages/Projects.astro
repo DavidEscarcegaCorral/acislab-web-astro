@@ -1,8 +1,47 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import ProjectCard from '../components/projects/ProjectCard.astro';
+
+// Obtenemos todos los proyectos
+const allProjects = await getCollection('projects');
+
+// Opcional: Los ordenamos por fecha de publicación (los más recientes primero)
+const sortedProjects = allProjects.sort(
+  (a, b) => new Date(b.data.pubDate || 0).valueOf() - new Date(a.data.pubDate || 0).valueOf()
+);
 ---
 
-<Layout>
-  <h1>About the projects</h1>
-  <p>Content demo</p>
+<Layout title="Research Projects - ACISLAB" description="Explore the research projects developed by the Affective Computing and Intelligent Systems Laboratory.">
+    <main class="w-full bg-slate-50 min-h-screen pt-32 pb-20 px-6 md:px-20">
+        <div class="max-w-7xl mx-auto flex flex-col gap-16">
+            
+            <div class="flex flex-col gap-6 text-center md:text-left">
+                <span class="text-brand-secondary font-bold tracking-[0.2em] uppercase text-sm">
+                    Our Work
+                </span>
+                <h1 class="text-5xl md:text-7xl font-bold text-slate-900 tracking-tight">
+                    Research <span class="text-brand-secondary">Projects</span>
+                </h1>
+                <p class="text-lg md:text-xl text-slate-600 max-w-3xl leading-relaxed font-light">
+                    Discover how we are applying affective computing and intelligent systems to solve real-world problems in health informatics, simulation, and human-computer interaction.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+                {
+                    sortedProjects.map((project) => (
+                        <ProjectCard project={project} />
+                    ))
+                }
+            </div>
+            
+            {sortedProjects.length === 0 && (
+                <div class="py-20 text-center text-slate-500 text-lg">
+                    More projects are coming soon. Stay tuned!
+                </div>
+            )}
+
+        </div>
+    </main>
 </Layout>

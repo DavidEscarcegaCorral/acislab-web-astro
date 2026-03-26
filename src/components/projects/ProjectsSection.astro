@@ -2,7 +2,7 @@
 import { getCollection, render } from 'astro:content';
 
 const allProjects = await getCollection('projects');
-const previewProjects = allProjects.slice(0, 4);
+const previewProjects = allProjects;
 
 const renderedProjects = await Promise.all(
     previewProjects.map(async (project) => ({
@@ -35,7 +35,7 @@ const renderedProjects = await Promise.all(
 
             <div class="mb-10 flex w-full flex-col">
                 {
-                    renderedProjects.map(({ data, Content }) => (
+                    renderedProjects.map(({ data, id, Content }) => (
                         <div class="accordion-item border-brand-secondary border-t last:border-b">
                             <button class="accordion-button hover:text-brand-secondary flex w-full items-center justify-between py-5 text-left text-lg text-slate-500 transition-colors md:text-xl">
                                 <span class="accordion-title font-medium">
@@ -48,8 +48,23 @@ const renderedProjects = await Promise.all(
 
                             <div class="accordion-content grid [grid-template-rows:0fr] transition-[grid-template-rows] duration-300 ease-in-out">
                                 <div class="overflow-hidden">
+                                    {data.description && (
+                                <p class="pt-2 pb-4 text-base leading-relaxed text-slate-600 md:text-lg">
+                                    {data.description}
+                                </p>
+                                )}
+
                                     <div class="prose prose-sm max-w-none pb-6 text-slate-600">
                                         <Content />
+                                    </div>
+                                    <div class="pb-6 pt-2">
+                                        <a 
+                                            href={`/projects/${id.replace(/\.[^.]+$/, '')}`}
+                                            class="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-brand-secondary hover:text-brand-secondary/80 transition-colors group"
+                                        >
+                                            View Project details
+                                            <span class="transform transition-transform group-hover:translate-x-1">→</span>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -58,11 +73,6 @@ const renderedProjects = await Promise.all(
                 }
             </div>
 
-            <a
-                href="/Projects"
-                class="bg-brand-secondary block w-full py-5 text-center text-sm font-bold tracking-widest text-white uppercase transition-colors hover:opacity-90 md:text-base">
-                View All Projects
-            </a>
         </div>
     </div>
 </section>

@@ -1,0 +1,151 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+    const projects = await getCollection('projects');
+    return projects.map(project => ({
+        params: { id: project.id.replace(/\.[^.]+$/, '') },
+        props: { project },
+    }));
+}
+
+const { project } = Astro.props;
+const { data } = project;
+const { Content } = await render(project);
+
+const allSoftware = await getCollection('software');
+const relatedSoftwareData = data.relatedSoftware
+    ? allSoftware.filter(s => 
+        data.relatedSoftware!.includes(s.id.replace(/\.[^.]+$/, ''))
+      )
+    : [];
+
+const formattedDate = data.pubDate ? new Date(data.pubDate).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+}) : 'TBA';
+---
+
+<Layout title={`${data.title} - ACISLAB`} description={data.description}>
+    <main class="w-full bg-slate-50 min-h-screen pb-20">
+        
+        <div class="relative w-full h-[50vh] min-h-[400px] bg-slate-900">
+            {data.heroImage && (
+                <img 
+                    src={data.heroImage} 
+                    alt={data.title} 
+                    class="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-overlay"
+                />
+            )}
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent"></div>
+
+            <div class="absolute bottom-0 left-0 w-full px-6 pb-16 md:px-20">
+                <div class="max-w-5xl mx-auto flex flex-col gap-4">
+                    <a href="/Projects" class="text-brand-secondary hover:text-white transition-colors flex items-center gap-2 w-fit mb-4 text-sm font-bold tracking-widest uppercase">
+                        <span>←</span> Back to Projects
+                    </a>
+                    
+                    <div class="flex flex-wrap gap-2 mb-2">
+                        {data.tags?.map((tag: string) => (
+                            <span class="px-3 py-1 bg-brand-secondary/20 text-brand-secondary border border-brand-secondary/30 rounded-full text-xs font-semibold tracking-wider uppercase">
+                                {tag}
+                            </span>
+                        ))}
+                    </div>
+
+                    <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
+                        {data.title}
+                    </h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 md:px-20 pt-16 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
+            
+            <aside class="lg:col-span-4 flex flex-col gap-10">
+                
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 flex flex-col gap-6">
+                    <h3 class="text-xl font-bold text-slate-800 border-b pb-4">Project Details</h3>
+                    
+                    {data.lead && (
+                        <div>
+                            <span class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Project Lead</span>
+                            <span class="text-slate-700 font-medium">{data.lead}</span>
+                        </div>
+                    )}
+
+                    {data.status && (
+                        <div>
+                            <span class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Status</span>
+                            <span class={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-sm font-medium ${data.status.toLowerCase() === 'active' ? 'bg-green-100 text-green-800' : 'bg-slate-100 text-slate-800'}`}>
+                                <span class={`w-1.5 h-1.5 rounded-full ${data.status.toLowerCase() === 'active' ? 'bg-green-500' : 'bg-slate-500'}`}></span>
+                                {data.status}
+                            </span>
+                        </div>
+                    )}
+
+                    <div>
+                        <span class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Started</span>
+                        <span class="text-slate-700">{formattedDate}</span>
+                    </div>
+
+                    {data.collaborators && data.collaborators.length > 0 && (
+                        <div>
+                            <span class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Collaborators</span>
+                            <p class="text-slate-700">{data.collaborators.join(', ')}</p>
+                        </div>
+                    )}
+                </div>
+
+                {relatedSoftwareData.length > 0 && (
+                    <div class="bg-brand-secondary text-white p-8 rounded-2xl shadow-md flex flex-col gap-6">
+                        <h3 class="text-xl font-bold border-b border-white/20 pb-4">Related Software</h3>
+                        <div class="flex flex-col gap-4">
+                            {relatedSoftwareData.map((software) => (
+                                <div class="flex flex-col gap-2">
+                                    <span class="font-semibold text-lg">{software.data.title}</span>
+                                    <p class="text-sm text-white/80 leading-relaxed line-clamp-3">
+                                        {software.data.description}
+                                    </p>
+                                    {software.data.technologies && software.data.technologies.length > 0 && (
+                                        <div class="flex flex-wrap gap-1.5 mt-1">
+                                            {software.data.technologies.map((tech: string) => (
+                                                <span class="px-2 py-0.5 bg-white/20 text-white text-xs font-medium rounded-full">
+                                                    {tech}
+                                                </span>
+                                            ))}
+                                        </div>
+                                    )}
+                            <a 
+                            href={`/software/${software.id.replace(/\.[^.]+$/, '')}`} 
+                            class="text-sm font-bold uppercase tracking-wider text-white hover:text-white/70 underline underline-offset-4 mt-1 w-fit transition-colors"
+                            >
+                            View Tool →
+                        </a>
+                    </div>
+                    ))}
+                        </div>
+                    </div>
+                )}
+
+            </aside>
+
+            <article class="lg:col-span-8">
+                <p class="text-2xl md:text-3xl font-light text-slate-600 leading-relaxed mb-12">
+                    {data.description}
+                </p>
+
+                <div class="prose prose-lg md:prose-xl max-w-none prose-headings:text-brand-secondary prose-a:text-brand-secondary prose-img:rounded-xl">
+                    <Content />
+                </div>
+                
+                <div class="mt-16 p-8 bg-slate-100 rounded-xl text-center border border-slate-200 border-dashed">
+                    <p class="text-slate-500 font-medium">More detailed information about this project will be published soon.</p>
+                </div>
+            </article>
+
+        </div>
+    </main>
+</Layout>

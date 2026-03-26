@@ -1,4 +1,4 @@
-import { defineCollection, z } from "astro:content";
+import { defineCollection, z, reference } from "astro:content";
 
 const projects = defineCollection({
   schema: z.object({
@@ -9,6 +9,23 @@ const projects = defineCollection({
     tags: z.array(z.string()).optional(),
     featured: z.boolean().optional(),
     updatedDate: z.date().optional(),
+
+    lead: z.string().optional(),
+    status: z.string().optional(),
+    collaborators: z.array(z.string()).optional(), 
+    
+    relatedSoftware: z.array(z.string()).optional(),
+  }),
+});
+
+const software = defineCollection({
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    version: z.string().optional(),
+    technologies: z.array(z.string()).optional(),
+    heroImage: z.string().optional(),
+    relatedProjectId: z.string().optional(),
   }),
 });
 
@@ -22,4 +39,4 @@ const publications = defineCollection({
   }),
 });
 
-export const collections = { projects, publications };
+export const collections = { projects, software, publications };
