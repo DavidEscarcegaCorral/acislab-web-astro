@@ -1,5 +1,6 @@
 import { defineCollection, z, reference } from 'astro:content';
 import { glob } from 'astro/loaders';
+
 const projects = defineCollection({
     schema: z.object({
         title: z.string(),
