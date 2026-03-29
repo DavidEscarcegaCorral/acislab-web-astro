@@ -49,21 +49,22 @@ const renderedProjects = await Promise.all(
                             <div class="accordion-content grid [grid-template-rows:0fr] transition-[grid-template-rows] duration-300 ease-in-out">
                                 <div class="overflow-hidden">
                                     {data.description && (
-                                <p class="pt-2 pb-4 text-base leading-relaxed text-slate-600 md:text-lg">
-                                    {data.description}
-                                </p>
-                                )}
+                                        <p class="pt-2 pb-4 text-base leading-relaxed text-slate-600 md:text-lg">
+                                            {data.description}
+                                        </p>
+                                    )}
 
                                     <div class="prose prose-sm max-w-none pb-6 text-slate-600">
                                         <Content />
                                     </div>
-                                    <div class="pb-6 pt-2">
-                                        <a 
+                                    <div class="pt-2 pb-6">
+                                        <a
                                             href={`/projects/${id.replace(/\.[^.]+$/, '')}`}
-                                            class="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-brand-secondary hover:text-brand-secondary/80 transition-colors group"
-                                        >
+                                            class="text-brand-secondary hover:text-brand-secondary/80 group inline-flex items-center gap-2 text-sm font-bold tracking-wider uppercase transition-colors">
                                             View Project details
-                                            <span class="transform transition-transform group-hover:translate-x-1">→</span>
+                                            <span class="transform transition-transform group-hover:translate-x-1">
+                                                →
+                                            </span>
                                         </a>
                                     </div>
                                 </div>
@@ -72,7 +73,6 @@ const renderedProjects = await Promise.all(
                     ))
                 }
             </div>
-
         </div>
     </div>
 </section>
