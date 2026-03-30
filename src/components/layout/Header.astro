@@ -36,6 +36,49 @@ const isHome = pathname === '/';
 <script>
     const logo = document.getElementById('header-logo');
     const heroTitle = document.getElementById('hero-title');
+    const menuToggle = document.getElementById('mobile-menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuLines = document.querySelectorAll('.menu-line');
+    const body = document.body;
+
+    const closeMenu = () => {
+        mobileMenu?.classList.add('hidden');
+        mobileMenu?.classList.remove('flex');
+        menuToggle?.setAttribute('aria-expanded', 'false');
+        menuLines[0]?.classList.remove('rotate-45', 'translate-y-2');
+        menuLines[1]?.classList.remove('opacity-0');
+        menuLines[2]?.classList.remove('-rotate-45', '-translate-y-2');
+        body.style.overflow = '';
+    };
+
+    const openMenu = () => {
+        mobileMenu?.classList.remove('hidden');
+        mobileMenu?.classList.add('flex');
+        menuToggle?.setAttribute('aria-expanded', 'true');
+        menuLines[0]?.classList.add('rotate-45', 'translate-y-2');
+        menuLines[1]?.classList.add('opacity-0');
+        menuLines[2]?.classList.add('-rotate-45', '-translate-y-2');
+        body.style.overflow = 'hidden';
+    };
+
+    menuToggle?.addEventListener('click', () => {
+        const isOpen = menuToggle.getAttribute('aria-expanded') === 'true';
+        if (isOpen) {
+            closeMenu();
+        } else {
+            openMenu();
+        }
+    });
+
+    mobileMenu?.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', closeMenu);
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!menuToggle?.contains(e.target as Node) && !mobileMenu?.contains(e.target as Node)) {
+            closeMenu();
+        }
+    });
 
     if (logo && heroTitle) {
         const observer = new IntersectionObserver(
