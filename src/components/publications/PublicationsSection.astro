@@ -250,8 +250,16 @@ const years = [
             });
             pagination.appendChild(prev);
 
-            // Números de página
-            for (let i = 1; i <= totalPages; i++) {
+            const maxVisible = 5;
+            const half = Math.floor(maxVisible / 2);
+            let start = Math.max(1, currentPage - half);
+            let end = Math.min(totalPages, start + maxVisible - 1);
+
+            if (end - start < maxVisible - 1) {
+                start = Math.max(1, end - maxVisible + 1);
+            }
+
+            const createPageBtn = (i: number) => {
                 const btn = document.createElement("button");
                 btn.textContent = String(i);
                 btn.className = `px-4 py-1 rounded-full border font-medium transition-all ${
@@ -264,7 +272,32 @@ const years = [
                     applyFilters();
                     window.scrollTo({ top: 0, behavior: "smooth" });
                 });
-                pagination.appendChild(btn);
+                return btn;
+            };
+
+            const createEllipsis = () => {
+                const span = document.createElement("span");
+                span.textContent = "...";
+                span.className = "px-2 text-slate-400";
+                return span;
+            };
+
+            if (start > 1) {
+                pagination.appendChild(createPageBtn(1));
+                if (start > 2) {
+                    pagination.appendChild(createEllipsis());
+                }
+            }
+
+            for (let i = start; i <= end; i++) {
+                pagination.appendChild(createPageBtn(i));
+            }
+
+            if (end < totalPages) {
+                if (end < totalPages - 1) {
+                    pagination.appendChild(createEllipsis());
+                }
+                pagination.appendChild(createPageBtn(totalPages));
             }
 
             // Botón siguiente

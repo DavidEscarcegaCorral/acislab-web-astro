@@ -1,5 +1,5 @@
 ---
-import LinkButton from './LinkButton.astro';
+import PageButton from './PageButton.astro';
 
 const currentPath = Astro.url.pathname;
 
@@ -33,65 +33,103 @@ const links = [
 ];
 ---
 
-<div class="flex flex-col items-center justify-center gap-8 px-4 md:flex-row">
-    <!-- boton Our Research -->
-    <div class="group relative">
-        <LinkButton
-            href="#"
-            onclick="event.preventDefault();"
-            active={currentPath.startsWith('/OurResearch') ||
-                currentPath.startsWith('/ComputionalModelingEmotional') ||
-                currentPath.startsWith('/HealthInformatics')}>
-            Our research
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="h-5 w-5">
-                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                <path
-                    d="M21 16.008v-8.018a1.98 1.98 0 0 0 -1 -1.717l-7 -4.008a2.016 2.016 0 0 0 -2 0l-7 4.008c-.619 .355 -1 1.01 -1 1.718v8.018c0 .709 .381 1.363 1 1.717l7 4.008a2.016 2.016 0 0 0 2 0l7 -4.008c.619 -.355 1 -1.01 1 -1.718"
-                ></path>
-                <path d="M12 22v-10"></path>
-                <path d="M12 12l8.73 -5.04"></path>
-                <path d="M3.27 6.96l8.73 5.04"></path>
-            </svg>
-        </LinkButton>
+<nav
+    id="mobile-menu"
+    class="fixed top-16 left-0 right-0 z-40 flex-col items-center gap-4 py-6 px-4 bg-white border-b border-slate-200 shadow-lg md:relative md:top-0 md:z-auto md:flex-row md:bg-transparent md:border-b-0 md:shadow-none md:py-0 md:px-0 hidden md:flex">
+    <div class="flex flex-col items-center gap-4 w-full md:flex-row md:justify-center">
+        <div class="group relative w-full md:w-auto">
+            <PageButton
+                href="#"
+                onclick="event.preventDefault();"
+                active={currentPath.startsWith('/OurResearch') ||
+                    currentPath.startsWith('/ComputionalModelingEmotional') ||
+                    currentPath.startsWith('/HealthInformatics')}>
+                Our research
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="h-5 w-5 transition-transform duration-200 group-hover:rotate-180">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path
+                        d="M21 16.008v-8.018a1.98 1.98 0 0 0 -1 -1.717l-7 -4.008a2.016 2.016 0 0 0 -2 0l-7 4.008c-.619 .355 -1 1.01 -1 1.718v8.018c0 .709 .381 1.363 1 1.717l7 4.008a2.016 2.016 0 0 0 2 0l7 -4.008c.619 -.355 1 -1.01 1 -1.718"
+                    ></path>
+                    <path d="M12 22v-10"></path>
+                    <path d="M12 12l8.73 -5.04"></path>
+                    <path d="M3.27 6.96l8.73 5.04"></path>
+                </svg>
+            </PageButton>
 
-        <div
-            class="invisible absolute top-full left-0 mt-3 w-72 translate-y-2 scale-95 rounded-xl border border-slate-200 bg-white opacity-0 shadow-lg transition-all duration-300 ease-out group-hover:visible group-hover:translate-y-0 group-hover:scale-100 group-hover:opacity-100">
-            <ul class="py-2">
-                {
-                    researchAreas.map((area) => (
-                        <li>
-                            <a
-                                href={area.href}
-                                class={`hover:text-acislab-blue block px-5 py-3 text-sm transition-colors hover:bg-slate-50 ${
-                                    currentPath === area.href
-                                        ? 'text-acislab-blue font-bold'
-                                        : 'text-slate-700'
-                                }`}>
-                                <span class="block font-semibold">{area.label}</span>
-                            </a>
-                        </li>
-                    ))
-                }
-            </ul>
+            <div
+                class="invisible absolute top-full left-1/2 -translate-x-1/2 mt-3 w-72 translate-y-2 scale-95 rounded-xl border border-slate-200 bg-white opacity-0 shadow-lg transition-all duration-300 ease-out group-hover:visible group-hover:translate-y-0 group-hover:scale-100 group-hover:opacity-100 md:left-0 md:translate-x-0">
+                <ul class="py-2">
+                    {
+                        researchAreas.map((area) => (
+                            <li>
+                                <a
+                                    href={area.href}
+                                    class={`hover:text-acislab-blue block px-5 py-3 text-sm transition-colors hover:bg-slate-50 ${
+                                        currentPath === area.href
+                                            ? 'text-acislab-blue font-bold'
+                                            : 'text-slate-700'
+                                    }`}>
+                                    <span class="block font-semibold">{area.label}</span>
+                                </a>
+                            </li>
+                        ))
+                    }
+                </ul>
+            </div>
         </div>
-    </div>
 
-    <!-- Array con los links -->
-    {
-        links.map(({ label, href, icon }) => (
-            <LinkButton href={href} active={currentPath === href}>
-                {label}
-                <Fragment set:html={icon} />
-            </LinkButton>
-        ))
-    }
-    <slot />
-</div>
+        {
+            links.map(({ label, href, icon }) => (
+                <PageButton href={href} active={currentPath === href}>
+                    {label}
+                    <Fragment set:html={icon} />
+                </PageButton>
+            ))
+        }
+        <slot />
+    </div>
+</nav>
+
+<script>
+    const menuToggle = document.getElementById('mobile-menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuLines = document.querySelectorAll('.menu-line');
+
+    menuToggle?.addEventListener('click', () => {
+        const isOpen = !mobileMenu?.classList.contains('hidden');
+        
+        mobileMenu?.classList.toggle('hidden');
+        mobileMenu?.classList.toggle('flex');
+        
+        menuToggle.setAttribute('aria-expanded', String(!isOpen));
+
+        if (!isOpen) {
+            menuLines[0]?.classList.add('rotate-45', 'translate-y-2');
+            menuLines[1]?.classList.add('opacity-0');
+            menuLines[2]?.classList.add('-rotate-45', '-translate-y-2');
+        } else {
+            menuLines[0]?.classList.remove('rotate-45', 'translate-y-2');
+            menuLines[1]?.classList.remove('opacity-0');
+            menuLines[2]?.classList.remove('-rotate-45', '-translate-y-2');
+        }
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!menuToggle?.contains(e.target as Node) && !mobileMenu?.contains(e.target as Node)) {
+            mobileMenu?.classList.add('hidden');
+            mobileMenu?.classList.remove('flex');
+            menuToggle?.setAttribute('aria-expanded', 'false');
+            menuLines[0]?.classList.remove('rotate-45', 'translate-y-2');
+            menuLines[1]?.classList.remove('opacity-0');
+            menuLines[2]?.classList.remove('-rotate-45', '-translate-y-2');
+        }
+    });
+</script>
