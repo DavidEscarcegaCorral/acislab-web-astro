@@ -1,0 +1,29 @@
+---
+interface Props {
+    href: string;
+    icon?: string;
+    active?: boolean;
+    variant?: 'header' | 'page';
+}
+
+const { href, icon, active = false, variant = 'page' } = Astro.props;
+
+const baseStyles = 'flex items-center justify-center gap-2 transition-all';
+
+const variantStyles = {
+    page: 'text-xl text-acislab-gray rounded-lg border border-transparent bg-transparent px-6 py-2 font-medium duration-400 ease-in-out hover:border-white/20 hover:bg-white hover:text-blue-600 hover:shadow-lg hover:shadow-blue-500/30 active:scale-95',
+    header: 'px-6 py-4 text-lg font-medium rounded-xl md:px-4 md:py-2 md:text-base md:rounded-none md:w-auto w-full',
+};
+
+const activeStyles = {
+    page: '',
+    header: active
+        ? 'bg-brand-secondary/10 text-brand-secondary md:bg-transparent md:text-brand-secondary md:border-b-2 md:border-brand-secondary'
+        : 'text-slate-700 hover:bg-slate-100 md:hover:bg-transparent md:hover:text-brand-secondary',
+};
+---
+
+<a href={href} class:list={[baseStyles, variantStyles[variant], activeStyles[variant]]}>
+    <slot />
+    {icon && <Fragment set:html={icon} />}
+</a>
