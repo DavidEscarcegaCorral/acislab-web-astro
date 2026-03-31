@@ -26,9 +26,9 @@ const { title, description, href, heroImage } = Astro.props;
             )
         }
 
-        <div class="flex flex-grow flex-col gap-2 p-4">
+        <div class="flex grow flex-col gap-2 p-4">
             <h3
-                class="text-base font-semibold text-slate-900 transition-colors group-hover:text-[var(--color-acislab-blue)]">
+                class="group-hover:text-acislab-blue text-base font-semibold text-slate-900 transition-colors">
                 {title}
             </h3>
 
@@ -37,7 +37,7 @@ const { title, description, href, heroImage } = Astro.props;
             </p>
 
             <div
-                class="mt-auto flex items-center border-t border-slate-200 pt-3 text-sm font-medium text-[var(--color-brand-primary)]">
+                class="mt-auto flex items-center border-t border-slate-200 pt-3 text-sm font-medium text-(--color-brand-primary)">
                 View Area
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
