@@ -5,6 +5,7 @@ import ProjectCard from './ProjectCard.astro';
 const allprojects = await getCollection('projects');
 
 interface Props {
+    title: string;
     filterTag?: string;
 }
 
@@ -17,7 +18,7 @@ const projects = filterTag
 
 <section class="w-full bg-white">
     <div class="relative mx-auto max-w-7xl px-6">
-        <div class="swiper projectsSwiper !p-15">
+        <div class="swiper projectsSwiper p-15!">
             <div class="swiper-wrapper">
                 {
                     projects.map((project) => (
@@ -27,8 +28,8 @@ const projects = filterTag
                     ))
                 }
             </div>
-            <div class="swiper-button-next !text-brand-secondary"></div>
-            <div class="swiper-button-prev !text-brand-secondary"></div>
+            <div class="swiper-button-next text-brand-secondary!"></div>
+            <div class="swiper-button-prev text-brand-secondary!"></div>
             <div class="swiper-pagination"></div>
         </div>
     </div>
