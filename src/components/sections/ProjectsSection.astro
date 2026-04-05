@@ -2,25 +2,24 @@
 import { getCollection, render } from 'astro:content';
 
 const allProjects = await getCollection('projects');
-const previewProjects = allProjects;
+
+const shuffled = allProjects.sort(() => Math.random() - 0.5).slice(0, 4);
 
 const renderedProjects = await Promise.all(
-    previewProjects.map(async (project) => ({
+    shuffled.map(async (project) => ({
         ...project,
         Content: (await render(project)).Content,
     })),
 );
 ---
 
-<section class="relative z-10 w-full bg-white px-6 pt-20 pb-10 md:px-20 md:pt-32 md:pb-12">
+<section class="relative z-10 w-full bg-white px-6 py-20 md:px-20 md:py-32">
     <div class="mx-auto flex max-w-6xl flex-col md:flex-row">
         <div class="relative flex md:w-1/3 md:justify-end md:pr-10">
             <div class="bg-brand-secondary absolute -top-16 right-0 hidden h-20 w-px md:block">
             </div>
-
             <div class="bg-brand-secondary absolute top-32 right-0 bottom-0 hidden w-px md:block">
             </div>
-
             <h2
                 class="text-brand-secondary text-7xl font-bold tracking-widest md:text-8xl lg:text-9xl">
                 Our
@@ -33,11 +32,15 @@ const renderedProjects = await Promise.all(
                 Projects
             </h2>
 
-            <div class="mb-10 flex w-full flex-col">
+            <div class="mb-10 flex w-full flex-col" id="projects-accordion">
                 {
-                    renderedProjects.map(({ data, id, Content }) => (
+                    renderedProjects.map(({ data, id, Content }, index) => (
                         <div class="accordion-item border-brand-secondary border-t last:border-b">
-                            <button class="accordion-button hover:text-brand-secondary flex w-full items-center justify-between py-5 text-left text-lg text-slate-500 transition-colors md:text-xl">
+                            <button
+                                class="accordion-button hover:text-brand-secondary flex w-full items-center justify-between py-5 text-left text-lg text-slate-500 transition-colors md:text-xl"
+                                aria-expanded="false"
+                                aria-controls={`accordion-content-${index}`}
+                                id={`accordion-btn-${index}`}>
                                 <span class="accordion-title font-medium">
                                     {data.title ?? 'Project'}
                                 </span>
@@ -46,14 +49,17 @@ const renderedProjects = await Promise.all(
                                 </span>
                             </button>
 
-                            <div class="accordion-content grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-in-out">
+                            <div
+                                class="accordion-content grid transition-[grid-template-rows] duration-300 ease-in-out"
+                                id={`accordion-content-${index}`}
+                                role="region"
+                                aria-labelledby={`accordion-btn-${index}`}>
                                 <div class="overflow-hidden">
                                     {data.description && (
                                         <p class="pt-2 pb-4 text-base leading-relaxed text-slate-600 md:text-lg">
                                             {data.description}
                                         </p>
                                     )}
-
                                     <div class="prose prose-sm max-w-none pb-6 text-slate-600">
                                         <Content />
                                     </div>
@@ -77,41 +83,52 @@ const renderedProjects = await Promise.all(
     </div>
 </section>
 
+<style>
+    .accordion-content.is-open {
+        grid-template-rows: 1fr;
+    }
+    .accordion-content {
+        grid-template-rows: 0fr;
+    }
+</style>
+
 <script>
-    const buttons = document.querySelectorAll('.accordion-button');
+    const container = document.getElementById('projects-accordion');
+    if (container) {
+        container.querySelectorAll<HTMLButtonElement>('.accordion-button').forEach((button) => {
+            button.addEventListener('click', () => {
+                const item = button.closest('.accordion-item');
+                if (!item) return;
 
-    buttons.forEach((button) => {
-        button.addEventListener('click', () => {
-            const item = button.closest('.accordion-item');
-            if (!item) return;
+                const content = item.querySelector<HTMLElement>('.accordion-content');
+                const icon = item.querySelector<HTMLElement>('.icon');
+                const title = item.querySelector<HTMLElement>('.accordion-title');
+                if (!content || !icon) return;
 
-            const content = item.querySelector('.accordion-content');
-            const icon = item.querySelector('.icon');
-            const title = item.querySelector('.accordion-title');
+                const isOpen = button.getAttribute('aria-expanded') === 'true';
 
-            if (!content || !icon) return;
+                // Cerrar todos dentro de este contenedor
+                container.querySelectorAll<HTMLElement>('.accordion-content').forEach((c) => {
+                    c.classList.remove('is-open');
+                });
+                container.querySelectorAll<HTMLButtonElement>('.accordion-button').forEach((b) => {
+                    b.setAttribute('aria-expanded', 'false');
+                    const i = b.closest('.accordion-item')?.querySelector<HTMLElement>('.icon');
+                    const t = b
+                        .closest('.accordion-item')
+                        ?.querySelector<HTMLElement>('.accordion-title');
+                    if (i) i.style.transform = 'rotate(0deg)';
+                    if (t) t.classList.remove('text-brand-secondary');
+                });
 
-            const isOpen = content.classList.contains('[grid-template-rows:1fr]');
-
-            // Cerrar todos
-            document.querySelectorAll('.accordion-content').forEach((c) => {
-                c.classList.remove('[grid-template-rows:1fr]');
-                c.classList.add('[grid-template-rows:0fr]');
+                // Abrir si estaba cerrado
+                if (!isOpen) {
+                    content.classList.add('is-open');
+                    button.setAttribute('aria-expanded', 'true');
+                    icon.style.transform = 'rotate(45deg)';
+                    title?.classList.add('text-brand-secondary');
+                }
             });
-            document.querySelectorAll('.icon').forEach((i) => {
-                (i as HTMLElement).style.transform = 'rotate(0deg)';
-            });
-            document.querySelectorAll('.accordion-title').forEach((t) => {
-                (t as HTMLElement).classList.remove('text-brand-secondary');
-            });
-
-            // Abrir si estaba cerrado
-            if (!isOpen) {
-                content.classList.remove('[grid-template-rows:0fr]');
-                content.classList.add('[grid-template-rows:1fr]');
-                (icon as HTMLElement).style.transform = 'rotate(45deg)';
-                title?.classList.add('text-brand-secondary');
-            }
         });
-    });
+    }
 </script>

@@ -191,10 +191,10 @@ const years = [
 
             if (totalPages <= 1) return;
 
+            // Botón anterior
             const prev = document.createElement('button');
             prev.textContent = '←';
             prev.disabled = currentPage === 1;
-            prev.type = 'button';
             prev.className = `px-3 py-1 rounded-full border transition-all ${
                 currentPage === 1
                     ? 'border-slate-200 text-slate-300 cursor-not-allowed'
@@ -208,63 +208,60 @@ const years = [
             });
             pagination.appendChild(prev);
 
-            const getPageButtons = () => {
-                const pages: (number | 'ellipsis')[] = [];
-                const maxVisible = 5;
-                
-                if (totalPages <= maxVisible) {
-                    for (let i = 1; i <= totalPages; i++) pages.push(i);
-                } else {
-                    pages.push(1);
-                    
-                    if (currentPage > 3) {
-                        pages.push('ellipsis');
-                    }
-                    
-                    const start = Math.max(2, currentPage - 1);
-                    const end = Math.min(totalPages - 1, currentPage + 1);
-                    
-                    for (let i = start; i <= end; i++) {
-                        pages.push(i);
-                    }
-                    
-                    if (currentPage < totalPages - 2) {
-                        pages.push('ellipsis');
-                    }
-                    
-                    pages.push(totalPages);
-                }
-                return pages;
+            const maxVisible = 5;
+            const half = Math.floor(maxVisible / 2);
+            let start = Math.max(1, currentPage - half);
+            let end = Math.min(totalPages, start + maxVisible - 1);
+
+            if (end - start < maxVisible - 1) {
+                start = Math.max(1, end - maxVisible + 1);
+            }
+
+            const createPageBtn = (i: number) => {
+                const btn = document.createElement('button');
+                btn.textContent = String(i);
+                btn.className = `px-4 py-1 rounded-full border font-medium transition-all ${
+                    i === currentPage
+                        ? 'bg-brand-secondary text-white border-brand-secondary'
+                        : 'border-slate-300 text-slate-600 hover:border-brand-secondary hover:text-brand-secondary'
+                }`;
+                btn.addEventListener('click', () => {
+                    currentPage = i;
+                    applyFilters();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+                return btn;
             };
 
-            getPageButtons().forEach((page) => {
-                if (page === 'ellipsis') {
-                    const ellipsis = document.createElement('span');
-                    ellipsis.textContent = '...';
-                    ellipsis.className = 'px-2 text-slate-400';
-                    pagination.appendChild(ellipsis);
-                } else {
-                    const btn = document.createElement('button');
-                    btn.textContent = String(page);
-                    btn.type = 'button';
-                    btn.className = `px-4 py-1 rounded-full border font-medium transition-all ${
-                        page === currentPage
-                            ? 'bg-brand-secondary text-white border-brand-secondary'
-                            : 'border-slate-300 text-slate-600 hover:border-brand-secondary hover:text-brand-secondary'
-                    }`;
-                    btn.addEventListener('click', () => {
-                        currentPage = page;
-                        applyFilters();
-                        window.scrollTo({ top: 0, behavior: 'smooth' });
-                    });
-                    pagination.appendChild(btn);
-                }
-            });
+            const createEllipsis = () => {
+                const span = document.createElement('span');
+                span.textContent = '...';
+                span.className = 'px-2 text-slate-400';
+                return span;
+            };
 
+            if (start > 1) {
+                pagination.appendChild(createPageBtn(1));
+                if (start > 2) {
+                    pagination.appendChild(createEllipsis());
+                }
+            }
+
+            for (let i = start; i <= end; i++) {
+                pagination.appendChild(createPageBtn(i));
+            }
+
+            if (end < totalPages) {
+                if (end < totalPages - 1) {
+                    pagination.appendChild(createEllipsis());
+                }
+                pagination.appendChild(createPageBtn(totalPages));
+            }
+
+            // Botón siguiente
             const next = document.createElement('button');
             next.textContent = '→';
             next.disabled = currentPage === totalPages;
-            next.type = 'button';
             next.className = `px-3 py-1 rounded-full border transition-all ${
                 currentPage === totalPages
                     ? 'border-slate-200 text-slate-300 cursor-not-allowed'
@@ -310,6 +307,7 @@ const years = [
             const start = (currentPage - 1) * ITEMS_PER_PAGE;
             const end = start + ITEMS_PER_PAGE;
 
+            // mostrar solo las de la página actual
             cards.forEach((card) => (card.style.display = 'none'));
             filtered.slice(start, end).forEach((card) => (card.style.display = 'block'));
 
@@ -322,6 +320,7 @@ const years = [
         buttons.forEach((btn) => {
             btn.addEventListener('click', () => {
                 currentYear = btn.getAttribute('data-year') || 'all';
+                // resetear al filtrar
                 currentPage = 1;
                 applyFilters();
             });
@@ -331,6 +330,7 @@ const years = [
         if (searchInput) {
             searchInput.addEventListener('input', (e) => {
                 currentSearch = (e.target as HTMLInputElement).value.toLowerCase();
+                // resetear al buscar
                 currentPage = 1;
                 applyFilters();
             });
