@@ -4,9 +4,11 @@ import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 
 import mdx from '@astrojs/mdx';
+import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
+    site: 'https://example-domain-please-replace.com',
     vite: {
         plugins: [tailwindcss()],
     },
@@ -14,5 +16,5 @@ export default defineConfig({
         host: '0.0.0.0',
     },
 
-    integrations: [mdx()],
+    integrations: [mdx(), sitemap()],
 });
